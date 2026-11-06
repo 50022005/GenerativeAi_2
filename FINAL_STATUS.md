@@ -11,4 +11,4 @@ Before submission, the student still needs to:
 3. Record a five-to-seven-minute demonstration using `DEMO_GUIDE.md`, upload it and add the accessible link.
 4. Verify repository/model/video accessibility, submit to Classroom and attend the live demo.
 
-Repository: https://github.com/50022005/GenerativeAi_2 . Verify that the evaluator can access the final source, report, adapter and logs before submitting.
+Delivery is local only, as requested by the student. Nothing was pushed to GitHub. The supplied repository URL is configured as the local Git remote, but publication and a working hosted source link remain separate submission steps if the student chooses to complete them later.

@@ -4,6 +4,8 @@
 
 A locally executable SmolLM2-135M system for the TrialGPT criterion benchmark, with supervised low-rank adaptation, evidence sentence IDs, explicit cached/uncached generation, greedy speculative decoding, educational tiled attention, and a standalone browser application.
 
+**Delivery: local files only. Nothing has been uploaded to GitHub, as requested.**
+
 **Educational screening prototype. Not a clinical enrollment decision.** Predictions and citations can be wrong. The aggregate message is an explicit rule over supplied criteria, not a ground-truth-labeled trial outcome.
 
 ## Recorded study
