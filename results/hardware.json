@@ -1,0 +1,8 @@
+{
+  "platform": "Windows-10-10.0.19045-SP0",
+  "python": "3.13.5",
+  "logical_cpus": 4,
+  "disk_free_gb": 7.119536128,
+  "ram_gib": 7.894199371337891,
+  "available_ram_gib": 1.9815177917480469
+}

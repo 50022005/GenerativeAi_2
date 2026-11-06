@@ -1,0 +1,574 @@
+[
+  {
+    "annotation_id": 160,
+    "patient_id": "sigir-201410",
+    "trial_id": "NCT02097186",
+    "criterion_type": "inclusion",
+    "gold_label": "included",
+    "gold_evidence": [
+      3
+    ],
+    "prediction": {
+      "criterion_type": "inclusion",
+      "criterion_text": "Patient willing to give full informed consent for participation",
+      "label": "included",
+      "evidence": [
+        0
+      ],
+      "evidence_text": [
+        {
+          "sentence_id": 0,
+          "text": "A physician is called to see a 67-year-old woman who underwent cardiac catheterization via the right femoral artery earlier in the morning."
+        }
+      ],
+      "explanation": "The Transformer predicted \"included\" for this inclusion criterion. Model-cited source text: [0] A physician is called to see a 67-year-old woman who underwent cardiac catheterization via the right femoral artery earlier in the morning.",
+      "needs_review": false,
+      "review_reason": "Verify the model interpretation against the criterion.",
+      "raw_output": " A1000",
+      "preprocessing": {
+        "sentence_ids": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "omitted_sentence_ids": [],
+        "input_tokens": 208
+      },
+      "timing": {
+        "tokens": [
+          330,
+          33,
+          32,
+          32,
+          32
+        ],
+        "prefill_s": 0.5929921999922954,
+        "decode_s": 0.37629920001199935,
+        "total_s": 0.9692914000042947,
+        "tokens_per_s": 5.15840747166213,
+        "decode_tokens_per_s": 10.629839233972458,
+        "cache_lengths": [
+          208,
+          209,
+          210,
+          211,
+          212
+        ]
+      },
+      "explanation_method": "Template plus verbatim model-selected source sentences; not a clinical rationale."
+    },
+    "source": {
+      "annotation_id": 160,
+      "patient_id": "sigir-201410",
+      "trial_id": "NCT02097186",
+      "note": "0. A physician is called to see a 67-year-old woman who underwent cardiac catheterization via the right femoral artery earlier in the morning.\n1. She is now complaining of a cool right foot.\n2. Upon examination she has a pulsatile mass in her right groin with loss of distal pulses, and auscultation reveals a bruit over the point at which the right femoral artery was entered.\n3. The patient will provide informed consent, and will comply with the trial protocol without any practical issues.",
+      "criterion_type": "inclusion",
+      "criterion_text": "Patient willing to give full informed consent for participation",
+      "label": "included",
+      "evidence": [
+        3
+      ]
+    },
+    "error_tags": [
+      "extra citation",
+      "missed citation"
+    ]
+  },
+  {
+    "annotation_id": 161,
+    "patient_id": "sigir-201410",
+    "trial_id": "NCT02097186",
+    "criterion_type": "inclusion",
+    "gold_label": "not included",
+    "gold_evidence": [],
+    "prediction": {
+      "criterion_type": "inclusion",
+      "criterion_text": "Patients undergoing elective carotid endarterectomy",
+      "label": "included",
+      "evidence": [
+        0
+      ],
+      "evidence_text": [
+        {
+          "sentence_id": 0,
+          "text": "A physician is called to see a 67-year-old woman who underwent cardiac catheterization via the right femoral artery earlier in the morning."
+        }
+      ],
+      "explanation": "The Transformer predicted \"included\" for this inclusion criterion. Model-cited source text: [0] A physician is called to see a 67-year-old woman who underwent cardiac catheterization via the right femoral artery earlier in the morning.",
+      "needs_review": false,
+      "review_reason": "Verify the model interpretation against the criterion.",
+      "raw_output": " A1000",
+      "preprocessing": {
+        "sentence_ids": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "omitted_sentence_ids": [],
+        "input_tokens": 207
+      },
+      "timing": {
+        "tokens": [
+          330,
+          33,
+          32,
+          32,
+          32
+        ],
+        "prefill_s": 0.721001999991131,
+        "decode_s": 0.33946770000329707,
+        "total_s": 1.060469699994428,
+        "tokens_per_s": 4.714891901226665,
+        "decode_tokens_per_s": 11.783153448652552,
+        "cache_lengths": [
+          207,
+          208,
+          209,
+          210,
+          211
+        ]
+      },
+      "explanation_method": "Template plus verbatim model-selected source sentences; not a clinical rationale."
+    },
+    "source": {
+      "annotation_id": 161,
+      "patient_id": "sigir-201410",
+      "trial_id": "NCT02097186",
+      "note": "0. A physician is called to see a 67-year-old woman who underwent cardiac catheterization via the right femoral artery earlier in the morning.\n1. She is now complaining of a cool right foot.\n2. Upon examination she has a pulsatile mass in her right groin with loss of distal pulses, and auscultation reveals a bruit over the point at which the right femoral artery was entered.\n3. The patient will provide informed consent, and will comply with the trial protocol without any practical issues.",
+      "criterion_type": "inclusion",
+      "criterion_text": "Patients undergoing elective carotid endarterectomy",
+      "label": "not included",
+      "evidence": []
+    },
+    "error_tags": [
+      "missed inclusion conflict",
+      "extra citation"
+    ]
+  },
+  {
+    "annotation_id": 165,
+    "patient_id": "sigir-201410",
+    "trial_id": "NCT02097186",
+    "criterion_type": "exclusion",
+    "gold_label": "not applicable",
+    "gold_evidence": [],
+    "prediction": {
+      "criterion_type": "exclusion",
+      "criterion_text": "Pregnancy",
+      "label": "not excluded",
+      "evidence": [],
+      "evidence_text": [],
+      "explanation": "The Transformer predicted \"not excluded\" for this exclusion criterion. The model cited no patient sentence. This does not establish absence of the condition.",
+      "needs_review": true,
+      "review_reason": "Check missing information, unsupported conclusion, or truncated record.",
+      "raw_output": " D0000",
+      "preprocessing": {
+        "sentence_ids": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "omitted_sentence_ids": [],
+        "input_tokens": 200
+      },
+      "timing": {
+        "tokens": [
+          422,
+          32,
+          32,
+          32,
+          32
+        ],
+        "prefill_s": 0.7279367000010097,
+        "decode_s": 0.35787159999017604,
+        "total_s": 1.0858082999911858,
+        "tokens_per_s": 4.604864413028145,
+        "decode_tokens_per_s": 11.177193161205874,
+        "cache_lengths": [
+          200,
+          201,
+          202,
+          203,
+          204
+        ]
+      },
+      "explanation_method": "Template plus verbatim model-selected source sentences; not a clinical rationale."
+    },
+    "source": {
+      "annotation_id": 165,
+      "patient_id": "sigir-201410",
+      "trial_id": "NCT02097186",
+      "note": "0. A physician is called to see a 67-year-old woman who underwent cardiac catheterization via the right femoral artery earlier in the morning.\n1. She is now complaining of a cool right foot.\n2. Upon examination she has a pulsatile mass in her right groin with loss of distal pulses, and auscultation reveals a bruit over the point at which the right femoral artery was entered.\n3. The patient will provide informed consent, and will comply with the trial protocol without any practical issues.",
+      "criterion_type": "exclusion",
+      "criterion_text": "Pregnancy",
+      "label": "not applicable",
+      "evidence": []
+    },
+    "error_tags": [
+      "applicability confusion"
+    ]
+  },
+  {
+    "annotation_id": 169,
+    "patient_id": "sigir-201410",
+    "trial_id": "NCT02097186",
+    "criterion_type": "exclusion",
+    "gold_label": "not enough information",
+    "gold_evidence": [],
+    "prediction": {
+      "criterion_type": "exclusion",
+      "criterion_text": "Patients with an estimated pre-operative glomerular filtration rate < 30mls/min/1.73m2",
+      "label": "not excluded",
+      "evidence": [],
+      "evidence_text": [],
+      "explanation": "The Transformer predicted \"not excluded\" for this exclusion criterion. The model cited no patient sentence. This does not establish absence of the condition.",
+      "needs_review": true,
+      "review_reason": "Check missing information, unsupported conclusion, or truncated record.",
+      "raw_output": " D0000",
+      "preprocessing": {
+        "sentence_ids": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "omitted_sentence_ids": [],
+        "input_tokens": 225
+      },
+      "timing": {
+        "tokens": [
+          422,
+          32,
+          32,
+          32,
+          32
+        ],
+        "prefill_s": 0.6924010999937309,
+        "decode_s": 0.3908718000020599,
+        "total_s": 1.0832728999957908,
+        "tokens_per_s": 4.615642097221696,
+        "decode_tokens_per_s": 10.233534371062124,
+        "cache_lengths": [
+          225,
+          226,
+          227,
+          228,
+          229
+        ]
+      },
+      "explanation_method": "Template plus verbatim model-selected source sentences; not a clinical rationale."
+    },
+    "source": {
+      "annotation_id": 169,
+      "patient_id": "sigir-201410",
+      "trial_id": "NCT02097186",
+      "note": "0. A physician is called to see a 67-year-old woman who underwent cardiac catheterization via the right femoral artery earlier in the morning.\n1. She is now complaining of a cool right foot.\n2. Upon examination she has a pulsatile mass in her right groin with loss of distal pulses, and auscultation reveals a bruit over the point at which the right femoral artery was entered.\n3. The patient will provide informed consent, and will comply with the trial protocol without any practical issues.",
+      "criterion_type": "exclusion",
+      "criterion_text": "Patients with an estimated pre-operative glomerular filtration rate < 30mls/min/1.73m2",
+      "label": "not enough information",
+      "evidence": []
+    },
+    "error_tags": [
+      "unsupported certainty"
+    ]
+  },
+  {
+    "annotation_id": 179,
+    "patient_id": "sigir-201410",
+    "trial_id": "NCT02264964",
+    "criterion_type": "exclusion",
+    "gold_label": "not excluded",
+    "gold_evidence": [
+      0
+    ],
+    "prediction": {
+      "criterion_type": "exclusion",
+      "criterion_text": "Had been performed central venous puncture or catheterization before.",
+      "label": "not excluded",
+      "evidence": [],
+      "evidence_text": [],
+      "explanation": "The Transformer predicted \"not excluded\" for this exclusion criterion. The model cited no patient sentence. This does not establish absence of the condition.",
+      "needs_review": true,
+      "review_reason": "Check missing information, unsupported conclusion, or truncated record.",
+      "raw_output": " D0000",
+      "preprocessing": {
+        "sentence_ids": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "omitted_sentence_ids": [],
+        "input_tokens": 210
+      },
+      "timing": {
+        "tokens": [
+          422,
+          32,
+          32,
+          32,
+          32
+        ],
+        "prefill_s": 0.7196007000020472,
+        "decode_s": 0.30574880000494886,
+        "total_s": 1.025349500006996,
+        "tokens_per_s": 4.8763860517471205,
+        "decode_tokens_per_s": 13.082635156492048,
+        "cache_lengths": [
+          210,
+          211,
+          212,
+          213,
+          214
+        ]
+      },
+      "explanation_method": "Template plus verbatim model-selected source sentences; not a clinical rationale."
+    },
+    "source": {
+      "annotation_id": 179,
+      "patient_id": "sigir-201410",
+      "trial_id": "NCT02264964",
+      "note": "0. A physician is called to see a 67-year-old woman who underwent cardiac catheterization via the right femoral artery earlier in the morning.\n1. She is now complaining of a cool right foot.\n2. Upon examination she has a pulsatile mass in her right groin with loss of distal pulses, and auscultation reveals a bruit over the point at which the right femoral artery was entered.\n3. The patient will provide informed consent, and will comply with the trial protocol without any practical issues.",
+      "criterion_type": "exclusion",
+      "criterion_text": "Had been performed central venous puncture or catheterization before.",
+      "label": "not excluded",
+      "evidence": [
+        0
+      ]
+    },
+    "error_tags": [
+      "missed citation",
+      "empty predicted evidence"
+    ]
+  },
+  {
+    "annotation_id": 185,
+    "patient_id": "sigir-201411",
+    "trial_id": "NCT01526382",
+    "criterion_type": "inclusion",
+    "gold_label": "included",
+    "gold_evidence": [
+      2,
+      3
+    ],
+    "prediction": {
+      "criterion_type": "inclusion",
+      "criterion_text": "Patients were included if they were diagnosed with Shock, Acute respiratory distress syndrome (ARDS), or both.",
+      "label": "not enough information",
+      "evidence": [],
+      "evidence_text": [],
+      "explanation": "The Transformer predicted \"not enough information\" for this inclusion criterion. The model cited no patient sentence. This does not establish absence of the condition.",
+      "needs_review": true,
+      "review_reason": "Check missing information, unsupported conclusion, or truncated record.",
+      "raw_output": " E000000",
+      "preprocessing": {
+        "sentence_ids": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "omitted_sentence_ids": [],
+        "input_tokens": 241
+      },
+      "timing": {
+        "tokens": [
+          414,
+          32,
+          32,
+          32,
+          32,
+          32,
+          32
+        ],
+        "prefill_s": 0.6983352999959607,
+        "decode_s": 0.6864531000028364,
+        "total_s": 1.384788399998797,
+        "tokens_per_s": 5.05492391473389,
+        "decode_tokens_per_s": 8.74058256853266,
+        "cache_lengths": [
+          241,
+          242,
+          243,
+          244,
+          245,
+          246,
+          247
+        ]
+      },
+      "explanation_method": "Template plus verbatim model-selected source sentences; not a clinical rationale."
+    },
+    "source": {
+      "annotation_id": 185,
+      "patient_id": "sigir-201411",
+      "trial_id": "NCT01526382",
+      "note": "0. A 40-year-old woman with no past medical history presents to the ER with excruciating pain in her right arm that had started 1 hour prior to her admission.\n1. She denies trauma.\n2. On examination she is pale and in moderate discomfort, as well as tachypneic and tachycardic.\n3. Her body temperature is normal and her blood pressure is 80/60.\n4. Her right arm has no discoloration or movement limitation.\n5. The patient will provide informed consent, and will comply with the trial protocol without any practical issues.",
+      "criterion_type": "inclusion",
+      "criterion_text": "Patients were included if they were diagnosed with Shock, Acute respiratory distress syndrome (ARDS), or both.",
+      "label": "included",
+      "evidence": [
+        2,
+        3
+      ]
+    },
+    "error_tags": [
+      "over-abstention",
+      "missed citation",
+      "empty predicted evidence"
+    ]
+  },
+  {
+    "annotation_id": 304,
+    "patient_id": "sigir-201417",
+    "trial_id": "NCT01745731",
+    "criterion_type": "inclusion",
+    "gold_label": "included",
+    "gold_evidence": [
+      0
+    ],
+    "prediction": {
+      "criterion_type": "inclusion",
+      "criterion_text": "Patients of both sexes aged ≥ 18 years.",
+      "label": "not enough information",
+      "evidence": [],
+      "evidence_text": [],
+      "explanation": "The Transformer predicted \"not enough information\" for this inclusion criterion. The model cited no patient sentence. This does not establish absence of the condition.",
+      "needs_review": true,
+      "review_reason": "Check missing information, unsupported conclusion, or truncated record.",
+      "raw_output": " E000000",
+      "preprocessing": {
+        "sentence_ids": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "omitted_sentence_ids": [],
+        "input_tokens": 240
+      },
+      "timing": {
+        "tokens": [
+          414,
+          32,
+          32,
+          32,
+          32,
+          32,
+          32
+        ],
+        "prefill_s": 0.7526247999921907,
+        "decode_s": 0.5965621000068495,
+        "total_s": 1.3491868999990402,
+        "tokens_per_s": 5.188310085137188,
+        "decode_tokens_per_s": 10.05762853512,
+        "cache_lengths": [
+          240,
+          241,
+          242,
+          243,
+          244,
+          245,
+          246
+        ]
+      },
+      "explanation_method": "Template plus verbatim model-selected source sentences; not a clinical rationale."
+    },
+    "source": {
+      "annotation_id": 304,
+      "patient_id": "sigir-201417",
+      "trial_id": "NCT01745731",
+      "note": "0. A 48-year-old white male with history of common variable immunodeficiency (CVID) with acute abdominal pain, fever, dehydration, HR of 132 bpm, BP 80/40.\n1. The physical examination is remarkable for tenderness and positive Murphy sign.\n2. Abdominal ultrasound shows hepatomegaly and abundant free intraperitoneal fluid.\n3. Exploratory laparotomy reveals a ruptured liver abscess, which is then surgically drained.\n4. After surgery, the patient is taken to the ICU.\n5. The patient will provide informed consent, and will comply with the trial protocol without any practical issues.",
+      "criterion_type": "inclusion",
+      "criterion_text": "Patients of both sexes aged ≥ 18 years.",
+      "label": "included",
+      "evidence": [
+        0
+      ]
+    },
+    "error_tags": [
+      "over-abstention",
+      "missed citation",
+      "empty predicted evidence"
+    ]
+  },
+  {
+    "annotation_id": 381,
+    "patient_id": "sigir-201421",
+    "trial_id": "NCT00997100",
+    "criterion_type": "inclusion",
+    "gold_label": "included",
+    "gold_evidence": [
+      0
+    ],
+    "prediction": {
+      "criterion_type": "inclusion",
+      "criterion_text": "Age > 18 years at the time of signing the informed consent form",
+      "label": "not enough information",
+      "evidence": [],
+      "evidence_text": [],
+      "explanation": "The Transformer predicted \"not enough information\" for this inclusion criterion. The model cited no patient sentence. This does not establish absence of the condition.",
+      "needs_review": true,
+      "review_reason": "Check missing information, unsupported conclusion, or truncated record.",
+      "raw_output": " E00000",
+      "preprocessing": {
+        "sentence_ids": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "omitted_sentence_ids": [],
+        "input_tokens": 244
+      },
+      "timing": {
+        "tokens": [
+          414,
+          32,
+          32,
+          32,
+          32,
+          32
+        ],
+        "prefill_s": 0.7057040000072448,
+        "decode_s": 0.5145151000033366,
+        "total_s": 1.2202191000105813,
+        "tokens_per_s": 4.91714971511917,
+        "decode_tokens_per_s": 9.717887774270523,
+        "cache_lengths": [
+          244,
+          245,
+          246,
+          247,
+          248,
+          249
+        ]
+      },
+      "explanation_method": "Template plus verbatim model-selected source sentences; not a clinical rationale."
+    },
+    "source": {
+      "annotation_id": 381,
+      "patient_id": "sigir-201421",
+      "trial_id": "NCT00997100",
+      "note": "0. A 21-year-old female is evaluated for progressive arthralgias and malaise.\n1. On examination she is found to have alopecia, a rash mainly distributed on the bridge of her nose and her cheeks, a delicate non-palpable purpura on her calves, and swelling and tenderness of her wrists and ankles.\n2. Her lab shows normocytic anemia, thrombocytopenia, a 4/4 positive ANA and anti-dsDNA.\n3. Her urine is positive for protein and RBC casts.\n4. The patient will provide informed consent, and will comply with the trial protocol without any practical issues.",
+      "criterion_type": "inclusion",
+      "criterion_text": "Age > 18 years at the time of signing the informed consent form",
+      "label": "included",
+      "evidence": [
+        0
+      ]
+    },
+    "error_tags": [
+      "over-abstention",
+      "missed citation",
+      "empty predicted evidence"
+    ]
+  }
+]

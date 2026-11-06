@@ -1,0 +1,23 @@
+{
+  "epochs": 3,
+  "max_length": 1024,
+  "lr": 0.001,
+  "limit": 0,
+  "accumulation": 8,
+  "last_layers": 6,
+  "rank": 8,
+  "alpha": 16,
+  "seed": 42,
+  "base": {
+    "repo": "HuggingFaceTB/SmolLM2-135M-Instruct",
+    "sha": "12fd25f77366fa6b3b4b768ec3050bf629380bac"
+  },
+  "trainable_parameters": 92160,
+  "total_parameters": 134607168,
+  "train_count": 603,
+  "validation_count": 206,
+  "objective": "response-only autoregressive cross entropy; label plus evidence bitmap",
+  "precision": "float32",
+  "device": "cpu",
+  "threads": 2
+}

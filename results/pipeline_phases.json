@@ -1,0 +1,56 @@
+[
+  {
+    "phase": "correctness tests",
+    "returncode": 0,
+    "elapsed_s": 27.214669600012712,
+    "finished_utc": "2026-11-06T12:41:48.467698+00:00"
+  },
+  {
+    "phase": "selected validation",
+    "returncode": 0,
+    "elapsed_s": 366.20314829998824,
+    "finished_utc": "2026-11-06T12:47:54.671674+00:00"
+  },
+  {
+    "phase": "freeze protocol",
+    "returncode": 0,
+    "elapsed_s": 0.14751059999980498,
+    "finished_utc": "2026-11-06T12:47:54.820224+00:00"
+  },
+  {
+    "phase": "base final test",
+    "returncode": 0,
+    "elapsed_s": 349.6872601000068,
+    "finished_utc": "2026-11-06T12:53:44.508477+00:00"
+  },
+  {
+    "phase": "adapted final test",
+    "returncode": 0,
+    "elapsed_s": 300.89064979999966,
+    "finished_utc": "2026-11-06T12:58:45.399910+00:00"
+  },
+  {
+    "phase": "sequential benchmarks",
+    "returncode": 0,
+    "elapsed_s": 669.1476733000018,
+    "finished_utc": "2026-11-06T13:09:54.548550+00:00"
+  },
+  {
+    "phase": "qualitative probes",
+    "returncode": 0,
+    "elapsed_s": 21.90736919999472,
+    "finished_utc": "2026-11-06T13:10:16.456991+00:00"
+  },
+  {
+    "phase": "analysis artifacts",
+    "returncode": 0,
+    "elapsed_s": 11.073772799994913,
+    "finished_utc": "2026-11-06T13:10:27.531571+00:00"
+  },
+  {
+    "phase": "IEEE LaTeX compilation",
+    "returncode": 0,
+    "elapsed_s": 5.275249199999962,
+    "finished_utc": "2026-11-06T13:10:32.809342+00:00"
+  }
+]

@@ -1,0 +1,150 @@
+{
+  "note": "Synthetic qualitative probes, not supervised benchmark rows or held-out accuracy estimates.",
+  "records": [
+    {
+      "case": {
+        "case_id": "contradictory_age",
+        "purpose": "Contradictory explicit ages; the record needs human clarification.",
+        "note": "0. The patient is 52 years old.\n1. A later entry says the patient is 72 years old, without correcting the first entry.",
+        "criterion_type": "inclusion",
+        "criterion_text": "Age 18 to 65 years"
+      },
+      "prediction": {
+        "criterion_type": "inclusion",
+        "criterion_text": "Age 18 to 65 years",
+        "label": "not enough information",
+        "evidence": [],
+        "evidence_text": [],
+        "explanation": "The Transformer predicted \"not enough information\" for this inclusion criterion. The model cited no patient sentence. This does not establish absence of the condition.",
+        "needs_review": true,
+        "review_reason": "Check missing information, unsupported conclusion, or truncated record.",
+        "raw_output": " E00",
+        "preprocessing": {
+          "sentence_ids": [
+            0,
+            1
+          ],
+          "omitted_sentence_ids": [],
+          "input_tokens": 132
+        },
+        "timing": {
+          "tokens": [
+            414,
+            32,
+            32
+          ],
+          "prefill_s": 0.5268496999924537,
+          "decode_s": 0.17926840001018718,
+          "total_s": 0.7061181000026409,
+          "tokens_per_s": 4.248581080117873,
+          "decode_tokens_per_s": 11.15645590570534,
+          "cache_lengths": [
+            132,
+            133,
+            134
+          ]
+        },
+        "explanation_method": "Template plus verbatim model-selected source sentences; not a clinical rationale."
+      }
+    },
+    {
+      "case": {
+        "case_id": "missing_renal_information",
+        "purpose": "The criterion refers to kidney function absent from the supplied note.",
+        "note": "0. A 52-year-old woman has hypertension.\n1. Her kidney function and renal history are not documented.",
+        "criterion_type": "exclusion",
+        "criterion_text": "Severe renal impairment"
+      },
+      "prediction": {
+        "criterion_type": "exclusion",
+        "criterion_text": "Severe renal impairment",
+        "label": "not excluded",
+        "evidence": [],
+        "evidence_text": [],
+        "explanation": "The Transformer predicted \"not excluded\" for this exclusion criterion. The model cited no patient sentence. This does not establish absence of the condition.",
+        "needs_review": true,
+        "review_reason": "Check missing information, unsupported conclusion, or truncated record.",
+        "raw_output": " D00",
+        "preprocessing": {
+          "sentence_ids": [
+            0,
+            1
+          ],
+          "omitted_sentence_ids": [],
+          "input_tokens": 120
+        },
+        "timing": {
+          "tokens": [
+            422,
+            32,
+            32
+          ],
+          "prefill_s": 0.3654269000107888,
+          "decode_s": 0.13853319999179803,
+          "total_s": 0.5039601000025868,
+          "tokens_per_s": 5.9528522198178,
+          "decode_tokens_per_s": 14.436972509971701,
+          "cache_lengths": [
+            120,
+            121,
+            122
+          ]
+        },
+        "explanation_method": "Template plus verbatim model-selected source sentences; not a clinical rationale."
+      }
+    },
+    {
+      "case": {
+        "case_id": "explicit_negation",
+        "purpose": "A negated condition tests whether keyword overlap is confused with positive evidence.",
+        "note": "0. A 52-year-old woman denies a history of diabetes.\n1. Her medical record explicitly states that she has not been diagnosed with diabetes.",
+        "criterion_type": "inclusion",
+        "criterion_text": "Documented diagnosis of diabetes"
+      },
+      "prediction": {
+        "criterion_type": "inclusion",
+        "criterion_text": "Documented diagnosis of diabetes",
+        "label": "included",
+        "evidence": [
+          0
+        ],
+        "evidence_text": [
+          {
+            "sentence_id": 0,
+            "text": "A 52-year-old woman denies a history of diabetes."
+          }
+        ],
+        "explanation": "The Transformer predicted \"included\" for this inclusion criterion. Model-cited source text: [0] A 52-year-old woman denies a history of diabetes.",
+        "needs_review": false,
+        "review_reason": "Verify the model interpretation against the criterion.",
+        "raw_output": " A10",
+        "preprocessing": {
+          "sentence_ids": [
+            0,
+            1
+          ],
+          "omitted_sentence_ids": [],
+          "input_tokens": 129
+        },
+        "timing": {
+          "tokens": [
+            330,
+            33,
+            32
+          ],
+          "prefill_s": 0.4593167999992147,
+          "decode_s": 0.1891168000001926,
+          "total_s": 0.6484335999994073,
+          "tokens_per_s": 4.626533850193361,
+          "decode_tokens_per_s": 10.57547505032849,
+          "cache_lengths": [
+            129,
+            130,
+            131
+          ]
+        },
+        "explanation_method": "Template plus verbatim model-selected source sentences; not a clinical rationale."
+      }
+    }
+  ]
+}

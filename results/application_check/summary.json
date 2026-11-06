@@ -1,0 +1,9 @@
+{
+  "synthetic_input_only": true,
+  "screening_token_equality": true,
+  "live_benchmark_token_equality": true,
+  "selected_epoch": 3,
+  "trial_metadata_count": 72,
+  "export_verified": true,
+  "scope": "Actual local HTTP backend and generated HTML; final browser UI capture was blocked by the computer-use tool."
+}

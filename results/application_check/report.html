@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8"><title>Eligibility screening report</title>
+<style>body{font:15px/1.6 Arial,sans-serif;max-width:850px;margin:40px auto;padding:20px;color:#203d34}h1,h2{line-height:1.3}article{border-top:1px solid #ccd8cf;margin-top:25px;padding-top:15px}blockquote{background:#f1f6ee;padding:15px;margin:10px 0}small{color:#63756c}pre{white-space:pre-wrap;overflow-wrap:anywhere}@media print{body{margin:0}}</style>
+<h1>Clinical eligibility screening</h1><p><strong>Educational screening prototype. Not a clinical enrollment decision.</strong></p>
+<p>2026-11-06T13:17:35.167481+00:00<br>SmolLM2-135M-Instruct + local LoRA · cached</p>
+<p><small>Base revision: 12fd25f77366fa6b3b4b768ec3050bf629380bac<br>Selected epoch: 3<br>Adapter SHA-256: 172c8a6eb7c044ffb277d93a70b8cff091e2cd8dbda1c92e971dcce5f335809f</small></p>
+<h2>Insufficient information or applicability review required</h2><p>Any conflict &gt; any missing/applicability review &gt; no predicted conflict. Supplied criteria only.</p><h2>Patient record</h2><pre>0. A 52-year-old woman has type 2 diabetes.
+1. She takes metformin daily.
+2. Her most recent HbA1c is 7.5%.
+3. Kidney function is not documented.</pre>
+<article><small>1 · inclusion</small><h2>Age 18 to 65 years</h2><p><strong>Model label: not enough information</strong></p>
+<blockquote>[0] A 52-year-old woman has type 2 diabetes.</blockquote>
+<p>The Transformer predicted &#34;not enough information&#34; for this inclusion criterion. Model-cited source text: [0] A 52-year-old woman has type 2 diabetes.</p><p>Check missing information, unsupported conclusion, or truncated record.</p><p>Omitted sentence IDs: []. 1.066 seconds.</p></article><article><small>2 · exclusion</small><h2>Severe renal impairment</h2><p><strong>Model label: not excluded</strong></p>
+
+<p>The Transformer predicted &#34;not excluded&#34; for this exclusion criterion. The model cited no patient sentence. This does not establish absence of the condition.</p><p>Check missing information, unsupported conclusion, or truncated record.</p><p>Omitted sentence IDs: []. 0.811 seconds.</p></article>
+<hr><p><small>Record SHA-256: 10614bf848b121f3b2d47be115a5c2105885c42dd439f9791d1e3cc6569d8f1c<br>Explanation method: template plus verbatim model-selected evidence. All predictions require human verification.</small></p></html>

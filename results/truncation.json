@@ -1,0 +1,14 @@
+{
+  "train": {
+    "records": 603,
+    "truncated_records": 0,
+    "omitted_gold_evidence_count": 0,
+    "max_input_tokens": 529
+  },
+  "validation": {
+    "records": 206,
+    "truncated_records": 0,
+    "omitted_gold_evidence_count": 0,
+    "max_input_tokens": 386
+  }
+}

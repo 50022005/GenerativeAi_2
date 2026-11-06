@@ -1,0 +1,23 @@
+[
+  {
+    "case_id": "contradictory_age",
+    "purpose": "Contradictory explicit ages; the record needs human clarification.",
+    "note": "0. The patient is 52 years old.\n1. A later entry says the patient is 72 years old, without correcting the first entry.",
+    "criterion_type": "inclusion",
+    "criterion_text": "Age 18 to 65 years"
+  },
+  {
+    "case_id": "missing_renal_information",
+    "purpose": "The criterion refers to kidney function absent from the supplied note.",
+    "note": "0. A 52-year-old woman has hypertension.\n1. Her kidney function and renal history are not documented.",
+    "criterion_type": "exclusion",
+    "criterion_text": "Severe renal impairment"
+  },
+  {
+    "case_id": "explicit_negation",
+    "purpose": "A negated condition tests whether keyword overlap is confused with positive evidence.",
+    "note": "0. A 52-year-old woman denies a history of diabetes.\n1. Her medical record explicitly states that she has not been diagnosed with diabetes.",
+    "criterion_type": "inclusion",
+    "criterion_text": "Documented diagnosis of diabetes"
+  }
+]

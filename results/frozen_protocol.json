@@ -1,0 +1,20 @@
+{
+  "frozen_utc": "2026-11-06T12:47:54.797544+00:00",
+  "adapter_sha256": "172c8a6eb7c044ffb277d93a70b8cff091e2cd8dbda1c92e971dcce5f335809f",
+  "source_sha256": {
+    "trialmatch/data.py": "5d653d203cddfd38edeb72152e4bd43291097cd03200983f917f29e75d243ff9",
+    "trialmatch/model.py": "41fa0b34a41548ae5bb72959def1d774e9a3db176dd056b0842f5c6a925a4662",
+    "trialmatch/decoding.py": "2bdbd8c296cb6832a006690020b932ca96df9dc8c071fc57f552547adca658a1",
+    "trialmatch/pipeline.py": "37250b09099d60af7ee7df08876311a9e17d34386372363fc0445af2aa5d6591",
+    "trialmatch/metrics.py": "2b7e7458b6625b438ae05a9ad20cd54088666e21c3896c04f6a10b91a2b9d778",
+    "scripts/evaluate.py": "855b7fe72e25a24d20d872fde86d073cc98499245c81d5ab271020f49b42f654",
+    "data/split_manifest.json": "51c23f7ee191eaf97e3618465c4b4003e6688548cdf36df865bc0306f513d8fb",
+    "data/processed/train.jsonl": "a6e617362d9666cd3344f8d038e1f06847aa008beba7b9463620a1f7f51da8cd",
+    "data/processed/validation.jsonl": "0946f43102e560df295d07eeac63f2d42ad24b9683a51d4774345a511c796844",
+    "data/processed/test.jsonl": "0de6ca1fc9a1478d7e4fb6aa1e3317b9d1c016bc79e1be36011ce19cf6db5751",
+    "results/training_config.json": "62ee3f066eef4ea90bc1d0d3ff5c511d07dc389d42cc8718395acaba2edc08cf"
+  },
+  "selection": "Minimum token-weighted validation loss across three fixed epochs.",
+  "decoding": "Greedy, finite label/bitmap grammar, max input+output 1024, float32 CPU, eager attention",
+  "test_policy": "Evaluate base and adapted once, identical examples. No tuning after test."
+}

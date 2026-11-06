@@ -1,0 +1,11 @@
+{
+  "base_parameters": 134515008,
+  "draft_parameters": 49552704,
+  "adapter_parameters": 92160,
+  "target_fp32_weight_mib": 513.134033203125,
+  "draft_fp32_weight_mib": 189.028564453125,
+  "target_kv_bytes_per_token_batch1": 46080,
+  "draft_definition": "First 6/30 blocks with original embeddings and final normalization; uncalibrated; same tokenizer.",
+  "alternative_360m_parameters_from_config": 361821120,
+  "alternative_360m_fp32_weight_mib": 1380.238037109375
+}

@@ -1,0 +1,10 @@
+{
+  "full_loss": 3.58012056350708,
+  "response_loss": 3.5801215171813965,
+  "full_forward_s": 3.115096800000174,
+  "response_only_forward_s": 2.0474517999973614,
+  "response_forward_backward_s": 2.4600923000107286,
+  "input_tokens": 201,
+  "label_tokens": 5,
+  "note": "Single training-example engineering check during development, not final benchmark."
+}

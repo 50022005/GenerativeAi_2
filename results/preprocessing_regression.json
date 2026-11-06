@@ -1,0 +1,9 @@
+{
+  "splits_checked": [
+    "train",
+    "validation"
+  ],
+  "rows_checked": 809,
+  "source_spans_unchanged": true,
+  "note": "Requiring whitespace after a numbered sentence ID fixes decimal-leading free text without changing the previously evaluated validation inputs."
+}

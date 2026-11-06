@@ -1,0 +1,20 @@
+# Keep frozen experiment hashes identical across Windows/Linux Git checkouts.
+# Disabling EOL conversion is separate from displaying ordinary textual diffs.
+* -text
+*.py diff=python
+*.md diff
+*.tex diff
+*.json diff
+*.jsonl diff
+*.js diff
+*.css diff
+*.html diff
+*.toml diff
+*.txt diff
+*.bat diff
+*.pt binary
+*.pdf binary
+*.png binary
+*.jpg binary
+*.parquet binary
+*.zip binary

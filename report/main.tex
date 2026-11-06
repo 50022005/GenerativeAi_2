@@ -1,0 +1,141 @@
+\documentclass[conference]{IEEEtran}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb,graphicx,booktabs,array,url}
+\usepackage[hidelinks]{hyperref}
+\usepackage{placeins}
+\usepackage{balance}
+\setlength{\emergencystretch}{1em}
+\graphicspath{{figures/}}
+\title{Criterion: CPU-Only Adaptation and Verified Transformer Inference for Clinical Trial Eligibility Screening}
+\author{\IEEEauthorblockN{Muhammad Hashim Rahim}
+\IEEEauthorblockA{Student ID: i230028\\FAST NUCES\\Generative AI, Assignment 2}}
+\begin{document}
+\maketitle
+\begin{abstract}
+We investigate a locally executable Transformer for criterion-level clinical trial screening on a four-thread CPU without a paid service or GPU. The system adapts SmolLM2-135M-Instruct using low-rank updates and predicts an eligibility category together with patient-sentence evidence. A fixed patient-grouped split prevents patient leakage. We implement explicit key/value-cache decoding, exact greedy speculative decoding with a smaller layer-pruned draft, and educational tiled attention with online softmax. On 206 held-out criteria, adaptation raises accuracy from 23.3\% to 61.2\%, but evidence micro-F1 falls from 0.176 to 0.145; a training-majority reference reaches 62.6\% accuracy. Cached generation reproduces greedy tokens and is 2.02--8.28 times as fast as the uncached reference under the measured settings, while speculation is slower. A standalone browser application supports unseen notes, inclusion/exclusion criteria, source inspection, live inference comparisons and report export. These findings demonstrate CPU feasibility and implementation correctness while exposing substantial reasoning and retrieval failures. Explanations are limited to templates and verbatim model-selected sentences; neither the predictions nor the aggregated trial summary constitute an enrollment decision.
+\end{abstract}
+\begin{IEEEkeywords}
+clinical trial matching, CPU inference, low-rank adaptation, KV cache, online softmax, speculative decoding
+\end{IEEEkeywords}
+
+\section{Introduction}
+Trial eligibility combines clinical facts, logical conditions and incomplete records. A positive inclusion requirement and a disqualifying exclusion condition have different semantics. A missing fact cannot safely establish either eligibility or ineligibility. This project therefore predicts each criterion separately and preserves the expert categories, including insufficient information and non-applicability.
+
+The assignment is treated as a research and implementation task, not a reproduction of an existing application. The contributions are a CPU-executable supervised pipeline, three independently implemented autoregressive decoding paths, a numerically checked tiled-attention implementation, and a browser interface that exposes evidence and measured behavior. Evaluation concerns the criterion-level benchmark. An overall screening message is only an explicit rule applied to the supplied criteria.
+
+\section{Related Work and Design Alternatives}
+TrialGPT separates retrieval, criterion matching and aggregation \cite{trialgpt}. Its criterion annotations provide expert labels and evidence locations used here. We implement a smaller supervised matcher and do not copy its model predictions or claim its published performance. A compact model trades reasoning capacity for local feasibility \cite{smol}. The two architecture candidates in Table~\ref{tab:models} share a Llama-style decoder architecture and tokenizer family, but require different weight memory.
+
+LoRA freezes pretrained matrices and learns low-rank residual updates \cite{lora}. We choose it over full adaptation to reduce optimizer state and trainable memory. Adapting only the last six blocks further limits backward propagation through early blocks, at the cost of adaptation capacity. We do not assume LoRA alone eliminates activation memory or CPU computation.
+
+KV caching reuses historical keys and values across generation steps; positions and attention-mask dimensions must still account for the entire prefix \cite{cache}. FlashAttention motivates attention tiling and stable incremental normalization \cite{flash}. Our educational PyTorch implementation uses these mathematical ideas, without implementing its fused accelerator kernel or claiming equivalent hardware speed.
+
+Speculative decoding uses a draft to propose multiple tokens for target verification \cite{spec}. We implement its deterministic greedy specialization: accept exactly the target's matching prefix and correct the first mismatch. Unlike distribution-preserving stochastic speculative sampling, this experiment only claims greedy token equivalence. A pruned draft is feasible in RAM but can have poor acceptance. This is a measured limitation, not an assumed acceleration.
+
+\section{Materials and Methods}
+\subsection{Dataset Integrity and Fixed Split}
+The sole supervised source is the TrialGPT Criterion Annotations dataset \cite{dataset}. It contains 1,015 criterion annotations over 53 patients. We sort unique patient IDs, shuffle them with NumPy \texttt{default\_rng(42)}, and assign the first 37 patients to training, the next eight to validation and the final eight to testing. Table~\ref{tab:split} reports the resulting counts. Patient IDs, annotation counts and the raw-file checksum are saved in the manifest.
+
+\begin{table}[t]\centering
+\caption{Patient-grouped benchmark partition. All rows for a patient remain together.}\label{tab:split}
+\begin{tabular}{lrr}\toprule Partition & Patients & Criteria\\\midrule
+Train & 37 & 603\\ Validation & 8 & 206\\ Test & 8 & 206\\\bottomrule\end{tabular}
+\end{table}
+
+Preprocessing explicitly whitelists identifiers, patient text, criterion type/text, expert eligibility and expert evidence. Previous GPT explanations, predictions, sentence selections, annotation-quality judgments and the source training flag are excluded. Identifiers are retained for auditing but not included in the model prompt. Global schema and split-integrity checks do not guide model selection. Test predictions are generated only after the checkpoint and source-code hashes are frozen.
+
+\subsection{Inputs, Outputs and Truncation}
+Original numbered sentences keep their dataset IDs. Unnumbered application notes are split deterministically and numbered from zero. The input consists of a task instruction, the permitted labels for the criterion type, the numbered record, and the criterion. The label vocabulary is
+\{included, not included, excluded, not excluded, not enough information, not applicable\}. Inclusion permits the first two and last two labels; exclusion permits the middle two and last two.
+
+For CPU efficiency, the autoregressive response is one single-token label code followed by a binary evidence flag for each retained sentence, in original order. A deterministic parser returns a JSON label, original sentence IDs and verbatim text. The bitmap can represent any evidence subset, including an empty set. Greedy decoding masks the label vocabulary at the first step and permits only binary tokens thereafter. This same grammar is used before and after adaptation; it is an explicit structured-output constraint, not a clinical rule or a gold-label feature.
+
+The total input plus response budget is 1,024 tokens. Complete leading sentences are retained while whole trailing sentences are removed if necessary. Gold evidence never selects the retained window. Omitted sentence IDs and omitted gold citations are logged. No evidence is silently renumbered. Extremely long criteria or records without a fitting complete sentence are rejected. Table~\ref{tab:training} and the generated results describe observed truncation.
+
+\subsection{Model and Low-Rank Adaptation}
+\begin{table}[t]\centering\small
+\caption{Open-weight model candidates. Float32 weight estimates exclude activations, optimizer, cache and framework overhead. Both use Apache-2.0 licensing and an 8,192-token configured context.}\label{tab:models}
+\setlength{\tabcolsep}{4pt}\begin{tabular}{lrr}\toprule & 135M selected & 360M alternative\\\midrule
+Decoder blocks & 30 & 32\\Hidden width & 576 & 960\\Query/KV heads & 9/3 & 15/5\\Head dimension & 64 & 64\\Vocabulary & 49,152 & 49,152\\Nominal FP32 weights & 0.54 GB & 1.44 GB\\\bottomrule\end{tabular}
+\end{table}
+SmolLM2-135M-Instruct uses rotary positions, grouped-query attention, RMS normalization, SwiGLU-style feed-forward blocks and tied input/output embeddings \cite{smol,config135,config360}. We execute float32 eager attention on CPU. The model cards identify the licensing, while the downloaded configurations establish architectural sizes. The exact base revision is pinned in the download script.
+
+For the final six blocks, query and value projections become
+\begin{equation} y = Wx + (\alpha/r) BAx, \qquad r=8,\quad\alpha=16. \end{equation}
+The base matrices are frozen. $A$ is Kaiming-initialized and $B$ starts at zero, preserving base behavior before optimization. We train 92,160 adapter parameters with AdamW, learning rate $10^{-3}$, gradient norm clipping at 1 and effective batch size eight through gradient accumulation. Each example has batch size one. Training uses three fixed epochs, seed 42, and response-only next-token cross entropy. The final partial accumulation group uses its actual size. Minimum token-weighted validation loss selects the checkpoint; test performance cannot select it.
+
+The output projection is evaluated only for hidden positions needed to predict the response. This avoids allocating prompt-length vocabulary logits while preserving the response loss. A development check compares it numerically with the library's fully projected masked loss. The frozen early blocks still execute; computational savings are not presented as zero-cost training.
+
+Two engineering alternatives were tested during development. Full prompt-logit projection and response-only projection agreed to approximately $10^{-6}$ on the checked masked loss; their single-example timings are retained as a development check, not a controlled benchmark. The initial spaced-digit output format used two tokenizer tokens per flag. We replaced that assumption with explicit single-digit token construction and asserted the resulting response length. The plain completion prompt was retained identically for base and adapted evaluation; no clinical prompt or threshold was selected using test cases.
+
+\subsection{Evidence and Explanation Pipeline}
+The label code and bitmap are translated without label collapsing. Each citation is guaranteed to refer to a retained source sentence, although this does not guarantee medical relevance. The explanation uses a fixed description of the prediction and verbatim cited text, avoiding a second unconstrained rationale generation. Empty evidence triggers review regardless of the predicted label. Insufficient information and truncation also trigger review. This conservative review flag does not replace the model's label when calculating benchmark metrics.
+
+The trial summary applies the following precedence: any predicted exclusion or failed inclusion yields a potential conflict; otherwise missing information, missing evidence or non-applicability requests review; otherwise the supplied criteria have no predicted conflict. These are application rules, not learned or benchmark-labeled trial outcomes. All paths require human verification.
+
+\subsection{Explicit Cache-Aware Generation}
+The uncached reference recomputes the full prompt and generated prefix at every step. The cached path prefills once into a dynamic cache and subsequently forwards only the newest token. The attention mask spans the past and current tokens; absolute rotary position indices start at the cache length. The cache grows by one token per incremental forward. The final emitted token need not be forwarded again when generation stops. Cache-length traces are stored for verification.
+
+Both paths use argmax with identical structured constraints when screening. Benchmarks use unrestricted greedy generation at fixed output lengths to avoid response-length confounding. Different matrix shapes can introduce floating-point differences even for mathematically equivalent computations, so token equality is tested rather than assumed. Failed equality must stop an experiment instead of being hidden by an aggregate timing result.
+
+\subsection{Tiled Attention with Online Softmax}
+The dense reference calculates
+\begin{equation} O = \operatorname{softmax}(QK^\top/\sqrt{d}+M)V, \end{equation}
+where $M$ is zero for visible keys and negative infinity for masked keys. Its stable implementation subtracts each row maximum before exponentiation.
+
+For each query tile, the tiled version initializes a running maximum $m=-\infty$, normalizer $l=0$ and unnormalized output $a=0$. For a score tile $S$, it updates
+\begin{align}
+m'&=\max(m,\operatorname{rowmax}(S)),\\
+P&=\exp(S-m'),\quad s=\exp(m-m'),\\
+l'&=s l+\operatorname{rowsum}(P),\\
+a'&=s a+PV_{\mathrm{tile}},\quad O=a/l.
+\end{align}
+All-masked tiles contribute zero rather than producing NaNs from $-\infty-(-\infty)$. Causal comparisons use absolute query/key indices and support a query offset for rectangular attention. Tests cover unequal dimensions, non-divisible tiles, causal/noncausal masks and an offset. The default score tile is $32\times32$. No fused attention operator implements either reference or tiled calculation. The educational implementation is tested separately; it does not replace the target model's eager attention.
+
+\subsection{Greedy Speculative Decoding}
+The smaller draft retains the first six blocks and shared tokenizer definition of the base 135M model. It has 49,552,704 parameters (approximately 189.0 MiB of float32 weights), compared with 134,515,008 base target parameters (513.1 MiB). It is an uncalibrated layer-pruned language model, not an independently pretrained smaller model. Its original pretrained embeddings, layers and final normalization are reused. Target adaptation is not applied to the draft. This explicit construction avoids an incompatible-tokenizer pair and a second large download, but early-layer pruning can severely reduce proposal quality.
+
+Each round begins with both caches representing the accepted prefix and logits predicting its successor. The draft greedily proposes up to four tokens. A single target forward verifies their block. The saved pre-block target logits verify candidate zero; block logit $j-1$ verifies candidate $j$. The algorithm accepts the matching prefix. At a mismatch it crops both caches to that prefix and forwards the target's corrective token through both models. If all candidates match, it may emit one bonus target token and synchronize both caches. Cache-length assertions check every completed round. End-of-sequence and output-budget boundaries are handled explicitly. Greedy equality tests exercise rejection, complete acceptance, grammar constraints and early stopping.
+
+\subsection{Browser Application}
+The Flask application binds to loopback and opens the browser through a double-click launcher. The evaluator enters a note and one or more criteria or selects training-set trial metadata. Requests run sequentially through a worker queue; input errors and model-loading failures are displayed. Patient records are kept in process memory, excluded from experiment logs and not sent to a remote inference service. The app shows each criterion label, citation text, truncation warning and elapsed time. HTML export is escaped and printable. The inference lab runs a live three-mode comparison, and the study view reads the actual saved results. Appendix materials provide startup and demonstration instructions.
+
+\section{Experimental Setup and Metrics}
+The experiment uses Windows, Python 3.13.5, four available logical CPU threads and approximately 7.89 GiB RAM. PyTorch uses two intra-operation threads. Dependency versions and hardware details are recorded. Base weights, tokenizer revision, seed, split manifest, training configuration and selected adapter are supplied or reproducibly downloadable. CPU-only execution is compulsory for this implementation; no GPU result is claimed.
+
+Training wall time includes concurrent base-validation work during the early part of the run. It is an observed execution duration, not an isolated training-throughput comparison. Final inference and attention benchmarks run sequentially after these jobs have finished.
+
+We report criterion accuracy, macro-F1 over the full applicable label vocabulary (including zero-support labels with zero division set to zero), per-class precision/recall/F1, and confusion matrices overall and by criterion type. Evidence is evaluated as sets of original sentence IDs. Micro scores pool TP/FP/FN; macro scores average per-record precision, recall and F1. A pair of empty gold/predicted sets scores one per record and contributes no micro counts; exactly one empty set scores zero. Full untruncated gold sets are used, so dropped evidence would count as a false negative.
+
+Decoding benchmarks use three input/output pairs: 32/8, 128/16 and 256/32 tokens, the same adapted target and identical prompts. Each configuration runs in a fresh subprocess, gets one warmup and three measured repetitions. CPU operations complete synchronously; no CUDA synchronization is applicable. We record prefill, subsequent decode time, total time, throughput and process peak resident memory. Prefill in speculative mode includes both models. Total throughput divides emitted tokens by end-to-end time; decode-only timing excludes prefill. Peak RSS includes interpreter, weights, warmup and tensor buffers, not just cache allocations. These measurements are taken after training/evaluation completes to reduce contention.
+
+Attention uses float32 tensors with batch one, three heads, head width 32 and sequence lengths 64--512. We report maximum/mean absolute numerical errors, repeated CPU latency, score-buffer estimates and fresh-process peak RSS. RSS is sampled before allocating the independent dense output used for numerical verification. Allocator high-water behavior and interpreter memory can obscure small tensor-memory differences.
+
+\section{Results and Discussion}
+\input{generated_results.tex}
+\FloatBarrier
+
+\section{Limitations}
+The benchmark has only 53 patients, patient-level correlations, class imbalance and very few instances of some clinically important outcomes. A single fixed split and seed cannot establish robustness. The 135M general-purpose model has limited clinical and numerical reasoning capacity. Late-block LoRA can underfit or overfit and is not a substitute for domain pretraining. The label/evidence grammar enforces syntax, not factual correctness. The output confidence is not calibrated. Evidence selection can miss relevant facts or cite irrelevant text even when the classification is correct. The template explanation does not establish clinical entailment, contradictions, temporal ordering or sufficient understanding of a multi-part criterion.
+
+The draft is deliberately small but uncalibrated; weak acceptance can make speculative generation slower than cached greedy decoding. RSS is a process high-water metric and cannot isolate algorithm workspace. Tiled PyTorch attention has loop and dispatch overhead; a mathematically smaller score workspace does not imply lower process RSS or faster execution. The local server is intended for a single educational user, not a protected medical-data deployment. Trial metadata shown in the app comes from training annotations and is not a current recruitment registry. Author details identify the submission; external hosting and the student's recorded demonstration must be verified separately.
+
+\section{Conclusion}
+This project makes the complete criterion-screening workflow executable on CPU and exposes the mechanisms behind caching, online-softmax attention and greedy speculative verification. The evidence needed to judge success is the held-out metrics, exactness checks, saved logs and usable application, including negative results. Future work should study more capable medically adapted models, stronger draft calibration, uncertainty calibration and prospective expert review, using validation-only decisions and a new held-out evaluation.
+
+\appendix[AI Use and Reproducibility]
+OpenAI Codex assisted with literature discovery, implementation, debugging, tests, interface design and report preparation. Hugging Face Transformers and PyTorch provide pretrained model execution and differentiation; the low-rank wrapper, decoding loops, online-softmax tiling, preprocessing, evaluation and application code are project implementations. Research references informed the methods; the TrialGPT repository was not run as the submitted solution. Results in this paper must be regenerated from the included logs rather than copied from prior work. The student must review, understand and defend every component. The repository is \url{https://github.com/50022005/GenerativeAi_2}. Instructions, weights-download code and the demonstration guide are included there. A five-to-seven-minute student-recorded application video and its accessible link are separate submission items; this paper does not claim that a recording has been uploaded.
+
+\balance
+\begin{thebibliography}{10}
+\bibitem{trialgpt} Q. Jin et al., ``Matching patients to clinical trials with large language models,'' \emph{Nature Communications}, vol. 15, art. 9074, 2024, doi: 10.1038/s41467-024-53081-z.
+\bibitem{smol} Hugging Face, ``SmolLM2-135M-Instruct and SmolLM2-360M-Instruct model cards,'' \url{https://huggingface.co/HuggingFaceTB/SmolLM2-135M-Instruct}, accessed Nov. 6, 2026.
+\bibitem{lora} E. J. Hu et al., ``LoRA: Low-rank adaptation of large language models,'' arXiv:2106.09685, 2021.
+\bibitem{cache} Hugging Face, ``How caching works,'' Transformers documentation, \url{https://huggingface.co/docs/transformers/cache_explanation}, accessed Nov. 6, 2026.
+\bibitem{flash} T. Dao et al., ``FlashAttention: Fast and memory-efficient exact attention with IO-awareness,'' arXiv:2205.14135, 2022.
+\bibitem{spec} Y. Leviathan, M. Kalman, and Y. Matias, ``Fast inference from Transformers via speculative decoding,'' arXiv:2211.17192, 2023.
+\bibitem{dataset} NCBI, ``TrialGPT-Criterion-Annotations,'' \url{https://huggingface.co/datasets/ncbi/TrialGPT-Criterion-Annotations}, accessed Nov. 6, 2026.
+\bibitem{config135} Hugging Face, ``135M model configuration,'' \url{https://huggingface.co/HuggingFaceTB/SmolLM2-135M-Instruct/blob/main/config.json}, accessed Nov. 6, 2026.
+\bibitem{config360} Hugging Face, ``360M model configuration,'' \url{https://huggingface.co/HuggingFaceTB/SmolLM2-360M-Instruct/blob/main/config.json}, accessed Nov. 6, 2026.
+\end{thebibliography}
+\end{document}

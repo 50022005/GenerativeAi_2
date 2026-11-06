@@ -1,0 +1,9 @@
+# Observed engineering difficulties
+
+- The environment had four logical CPU threads, about 7.89 GiB RAM and limited disk space. Concurrent full model processes reduced available memory and slowed development. Final timing measurements therefore run in fresh sequential subprocesses after training/evaluation is idle.
+- The tokenizer encodes a space-prefixed digit (` 0` or ` 1`) as two tokens. Label codes such as ` A` are single tokens. The first bitmap assertion detected this; response tokens are now constructed explicitly as one label token followed by bare single-digit tokens.
+- A Windows test initially read UTF-8 data using the default cp1252 codec. It failed on a source character. Explicit UTF-8 reading fixed it; no dataset contents were changed to hide the failure.
+- Projecting vocabulary logits for every prompt token wasted CPU time and memory when only response tokens have a loss. A numerically verified response-only projection replaces the initial version. `cpu_optimization.json` records the check. Its timings were collected during development with contention and are not final benchmark claims.
+- An initial partial training/evaluation run and a four-example smoke checkpoint were archived under the ignored `results/development/` directory. They do not contribute to final experiment tables. The final training restarts from the pinned base with the same fixed seed and uses all 603 training rows.
+- A six-layer draft smoke experiment accepted no proposed raw tokens on the checked prompt and was slower. The final benchmarks retain measured acceptance and any slowdown rather than assume speculation is useful.
+- The report is compiled from IEEE LaTeX using a portable Tectonic installation because a system LaTeX installation was absent. Free standard TeX packages were fetched from its official bundle.
