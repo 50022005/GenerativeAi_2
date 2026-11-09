@@ -51,6 +51,6 @@ assert benchmark['token_equality'] is True
 (OUT/'live_benchmark.json').write_text(json.dumps(benchmark,indent=2))
 summary={'synthetic_input_only':True,'screening_token_equality':True,'live_benchmark_token_equality':True,
          'selected_epoch':3,'trial_metadata_count':len(trials),'export_verified':True,
-         'scope':'Actual local HTTP backend and generated HTML; final browser UI capture was blocked by the computer-use tool.'}
+         'scope':'Actual local HTTP backend and generated HTML. Separate final browser records are in results/browser_verification/.'}
 (OUT/'summary.json').write_text(json.dumps(summary,indent=2))
 print(json.dumps(summary,indent=2),flush=True)

@@ -1,0 +1,119 @@
+{
+  "adapter_sha256": "172c8a6eb7c044ffb277d93a70b8cff091e2cd8dbda1c92e971dcce5f335809f",
+  "aggregation_rule": "Any conflict > any missing/applicability review > no predicted conflict. Supplied criteria only.",
+  "checkpoint": {
+    "accumulation": 8,
+    "alpha": 16,
+    "base": {
+      "repo": "HuggingFaceTB/SmolLM2-135M-Instruct",
+      "sha": "12fd25f77366fa6b3b4b768ec3050bf629380bac"
+    },
+    "device": "cpu",
+    "epochs": 3,
+    "last_layers": 6,
+    "limit": 0,
+    "lr": 0.001,
+    "max_length": 1024,
+    "objective": "response-only autoregressive cross entropy; label plus evidence bitmap",
+    "precision": "float32",
+    "rank": 8,
+    "seed": 42,
+    "selected_epoch": 3,
+    "threads": 2,
+    "total_parameters": 134607168,
+    "train_count": 603,
+    "trainable_parameters": 92160,
+    "training_elapsed_s": 3307.66480720001,
+    "validation_count": 206,
+    "validation_loss": 0.34457541309624534
+  },
+  "created_utc": "2026-11-09T07:47:26.474188+00:00",
+  "criteria": [
+    {
+      "criterion_text": "Age between 18 and 70 years",
+      "criterion_type": "inclusion",
+      "evidence": [],
+      "evidence_text": [],
+      "explanation": "The Transformer predicted \"not enough information\" for this inclusion criterion. The model cited no patient sentence. This does not establish absence of the condition.",
+      "explanation_method": "Template plus verbatim model-selected source sentences; not a clinical rationale.",
+      "label": "not enough information",
+      "needs_review": true,
+      "preprocessing": {
+        "input_tokens": 136,
+        "omitted_sentence_ids": [],
+        "sentence_ids": [
+          0,
+          1,
+          2
+        ]
+      },
+      "raw_output": " E000",
+      "review_reason": "Check missing information, unsupported conclusion, or truncated record.",
+      "timing": {
+        "cache_lengths": [
+          136,
+          137,
+          138,
+          139
+        ],
+        "decode_s": 0.2925601999995706,
+        "decode_tokens_per_s": 10.254299798825688,
+        "prefill_s": 0.7114072000003944,
+        "tokens": [
+          414,
+          32,
+          32,
+          32
+        ],
+        "tokens_per_s": 3.9841931122466123,
+        "total_s": 1.003967399999965
+      }
+    },
+    {
+      "criterion_text": "Currently receiving dialysis",
+      "criterion_type": "exclusion",
+      "evidence": [],
+      "evidence_text": [],
+      "explanation": "The Transformer predicted \"not excluded\" for this exclusion criterion. The model cited no patient sentence. This does not establish absence of the condition.",
+      "explanation_method": "Template plus verbatim model-selected source sentences; not a clinical rationale.",
+      "label": "not excluded",
+      "needs_review": true,
+      "preprocessing": {
+        "input_tokens": 129,
+        "omitted_sentence_ids": [],
+        "sentence_ids": [
+          0,
+          1,
+          2
+        ]
+      },
+      "raw_output": " D000",
+      "review_reason": "Check missing information, unsupported conclusion, or truncated record.",
+      "timing": {
+        "cache_lengths": [
+          129,
+          130,
+          131,
+          132
+        ],
+        "decode_s": 0.23455190000004222,
+        "decode_tokens_per_s": 12.790346187771064,
+        "prefill_s": 0.393235999999888,
+        "tokens": [
+          422,
+          32,
+          32,
+          32
+        ],
+        "tokens_per_s": 6.371578681271883,
+        "total_s": 0.6277878999999302
+      }
+    }
+  ],
+  "decoding_mode": "cached",
+  "model": "SmolLM2-135M-Instruct + local LoRA",
+  "notice": "Educational screening prototype. Not a clinical enrollment decision.",
+  "overall_preliminary_outcome": "Insufficient information or applicability review required",
+  "patient_record": "0. A 44-year-old man has insulin-treated diabetes.\n1. He uses insulin every day.\n2. Dialysis history is not documented.",
+  "patient_sha256": "a687d1c0b76ffdfc1bfb1da277b2c9a70b00f0ba347a5d799e760cdd35e98c91"
+}

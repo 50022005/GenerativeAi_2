@@ -1,0 +1,62 @@
+{
+  "date": "2026-11-09",
+  "input": "Synthetic in-app example; no personal medical record",
+  "checks": {
+    "empty_note_rejected": true,
+    "malformed_criterion_rejected": true,
+    "recovered_to_successful_screening": true,
+    "three_screening_modes_token_equal": true,
+    "downloaded_export_opened_in_browser": true,
+    "export_epoch": 3,
+    "study_view_metrics_loaded": true,
+    "trial_selector_loaded": true,
+    "trial_selector_trial_count": 72,
+    "selected_trial_id": "NCT00015626",
+    "selected_trial_criteria_count": 7,
+    "newly_entered_note_and_criteria_completed": true
+  },
+  "live_benchmark": {
+    "input_tokens": 151,
+    "output_tokens": 16,
+    "warmups_per_mode": 1,
+    "measured_repeats": 2,
+    "token_equality": true,
+    "cached": {
+      "mean_s": 1.7845377499997994,
+      "repeated_total_s": [
+        1.8073986999997944,
+        1.7616767999998046
+      ]
+    },
+    "uncached": {
+      "mean_s": 7.4889225500000975,
+      "repeated_total_s": [
+        7.506505299999844,
+        7.471339800000351
+      ]
+    },
+    "speculative": {
+      "mean_s": 5.915758749999895,
+      "repeated_total_s": [
+        6.136736800000108,
+        5.694780699999683
+      ],
+      "acceptance_rate": 0
+    }
+  },
+  "screenshot_method": "CUA browser screenshot bytes saved unchanged through a temporary loopback form; JPEG, no image generation or retouching",
+  "screenshots": {
+    "application.jpg": "6d4add0135b0807ca6de770327afb3d58370684cdbb27445b03e640fda8478d2",
+    "inference.jpg": "efad3359193bb5f7f5068d011cfd0708f2d0654ebda198ba801515b426e7cb7b",
+    "export.jpg": "51ceeadbd88914a24a2f7f22045ac1b0c57ef1aab3c164d49844d49a2ea5d663"
+  },
+  "trial_selector_issue": "Initial browser verification found NaN criterion text invalidating JSON; filtered only application convenience metadata and added a regression test. Benchmark dataset and frozen model/inference files remain unchanged.",
+  "tests_passed": 22,
+  "ieee_report": {
+    "pages": 9,
+    "application_capture_page": 8,
+    "original_jpeg_stream_embedded_unchanged": true,
+    "pdf_sha256": "b9574a550dec54f0d1fe5fe6af96a7139f8e4313d845d1619557de3804b32a20",
+    "all_rendered_pages_visually_checked": true
+  }
+}

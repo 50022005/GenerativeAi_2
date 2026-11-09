@@ -1,15 +1,17 @@
 # Final project status
 
-The CPU training, fixed split, selected adapter, before/after validation and test evaluation, decoding and attention benchmarks, error analysis, IEEE report source/PDF, and standalone application are implemented. The current automated correctness suite passes all 21 checks (16 original and five GPU-extension checks). Results are measured, including weak evidence retrieval and frequent-label collapse; this is not a clinically reliable matcher.
+The CPU training, fixed split, selected adapter, before/after validation and test evaluation, decoding and attention benchmarks, error analysis, IEEE report source/PDF, and standalone application are implemented. The current automated correctness suite passes all 22 checks. Results are measured, including weak evidence retrieval and frequent-label collapse; this is not a clinically reliable matcher.
 
-The final browser capture was blocked because the computer-use tool could not verify the current Chrome URL confidently enough to continue. An earlier development browser screening succeeded, but it is not presented as final-checkpoint verification. The final trained application's HTTP screening, decoding comparison and HTML export have separate backend verification records under `results/application_check/`.
+Final browser verification completed on November 9, 2026 through the in-app browser. Empty-note and malformed-criterion errors recovered to successful screening. All three modes produced identical tokens. Citations, review flags, trial selection, a manually entered synthetic note, study results, downloaded HTML export and its browser rendering were checked. A browser-triggered live comparison passed equality (151 input / 16 output tokens); mean times were 7.489 s uncached, 1.785 s cached and 5.916 s speculative. This is a functional UI check, separate from the controlled study benchmarks.
+
+Verification found missing/NaN criterion text breaking the trial list's browser JSON. The application convenience endpoint now filters invalid entries, with a regression test; the benchmark annotations, frozen inference code and original selected adapter remain unchanged. The repaired browser lists 72 trials and correctly fills selected criteria.
+
+Genuine, unchanged browser screenshots are saved under `report/figures/`. The main IEEE report was rebuilt to nine pages with the application capture and browser-verification discussion, and all nine rendered pages were inspected. Detailed records are in `results/browser_verification/`; the earlier independent HTTP check remains in `results/application_check/`.
 
 Before submission, the student still needs to:
 
-1. Open the final app in the browser and verify its visible workflow.
-2. Save an actual application screenshot as `report/figures/application.png` (or `.jpg`) and double-click `Build_Report.bat` to include it in the report. No fabricated screenshot is supplied.
-3. Record a five-to-seven-minute demonstration using `DEMO_GUIDE.md`, upload it and add the accessible link.
-4. Verify repository/model/video accessibility, submit to Classroom and attend the live demo.
+1. Record a five-to-seven-minute demonstration using `DEMO_GUIDE.md`, upload it and add the accessible link.
+2. Verify repository/model/video accessibility, submit to Classroom and attend the live demo.
 
 The student subsequently authorized GitHub publication at https://github.com/50022005/GenerativeAi_2. Verify the final pushed commit and repository accessibility before submitting. See `RUBRIC_REVIEW.md` for the outstanding screenshot, recording and live-demo requirements.
 

@@ -2,7 +2,7 @@
 
 Figure~\ref{fig:workflow} summarizes the application path. The full experiments use 603 training annotations; development smoke runs are archived separately and are not reported as final results.
 
-The final automated suite reports 16 passing checks. These cover attention agreement, cached/uncached/speculative token equality, cache growth, full-acceptance and rejection branches, early stopping, structured masks, evidence empty-set conventions, data isolation, response-loss equivalence, frozen base weights, truncation and application input/export handling.
+The original CPU automated suite reports 16 passing checks. These cover attention agreement, cached/uncached/speculative token equality, cache growth, full-acceptance and rejection branches, early stopping, structured masks, evidence empty-set conventions, data isolation, response-loss equivalence, frozen base weights, truncation and application input/export handling.
 
 \begin{table}[t]\centering\small\caption{Selected training configuration and observed preprocessing.}\label{tab:training}\begin{tabular}{lr}\toprule Setting & Value\\\midrule
 
@@ -201,3 +201,15 @@ Explicit negation & included & [0]\\
 \bottomrule\end{tabular}\end{table}
 
 Table~\ref{tab:stress} tests three deliberately constructed situations after protocol freeze. The conflicting-age record contains both 52 and 72 years without resolving the discrepancy; citing a single age cannot resolve that contradiction. The missing-kidney-information case provides no renal measurement; a definite category would not establish that missing fact. The negation case distinguishes a condition mention from its presence. These probes illustrate behaviors for human review, not additional ground-truth benchmark performance or a basis for retuning.
+
+\subsection{Final Browser Workflow Verification}
+
+\begin{figure*}[t]\centering\includegraphics[width=\textwidth]{application.jpg}\caption{Genuine browser capture of the final CPU application on a synthetic record. The model abstains on an age criterion despite citing the stated age; this visible failure is preserved. The review warning and report-export control are part of the running interface.}\label{fig:app}\end{figure*}
+
+Figure~\ref{fig:app} shows an actual model result, not a mockup. Empty-note and malformed-criterion errors were displayed, followed by successful recovery. Cached, uncached and speculative screening completed through browser controls with identical emitted tokens. The downloaded HTML report was opened in a browser and retained the synthetic record, citation, selected epoch and adapter fingerprint. The study-results tab displayed the saved held-out metrics. These functional checks do not validate clinical reasoning.
+
+A browser-triggered live comparison used 151 input tokens and 16 raw output tokens, one warmup and two measured repeats per mode. Token equality passed. Mean total latency was 7.489 s uncached, 1.785 s cached, and 5.916 s speculative; draft acceptance was 0.0\%. This is a UI smoke comparison, separate from the controlled three-repeat benchmark tables.
+
+Browser verification exposed a missing criterion-text value that serialized as NaN and prevented JavaScript from loading the trial selector. The application now filters invalid convenience-metadata entries; the benchmark split, annotations, frozen inference code and selected adapter were not changed. After correction, the browser populated the trial list and loaded selected criteria. A regression test rejects nonstandard JSON constants. The current full suite passes 22 checks, including the GPU-extension checks and this regression.
+
+The live inference view exposes new measurements rather than a static performance chart; its additional screenshot accompanies the source as inference.jpg. Screenshot bytes were captured directly from the browser and saved unchanged; capture hashes and the verification record accompany the source.

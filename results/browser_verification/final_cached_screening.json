@@ -1,0 +1,175 @@
+{
+  "adapter_sha256": "172c8a6eb7c044ffb277d93a70b8cff091e2cd8dbda1c92e971dcce5f335809f",
+  "aggregation_rule": "Any conflict > any missing/applicability review > no predicted conflict. Supplied criteria only.",
+  "checkpoint": {
+    "accumulation": 8,
+    "alpha": 16,
+    "base": {
+      "repo": "HuggingFaceTB/SmolLM2-135M-Instruct",
+      "sha": "12fd25f77366fa6b3b4b768ec3050bf629380bac"
+    },
+    "device": "cpu",
+    "epochs": 3,
+    "last_layers": 6,
+    "limit": 0,
+    "lr": 0.001,
+    "max_length": 1024,
+    "objective": "response-only autoregressive cross entropy; label plus evidence bitmap",
+    "precision": "float32",
+    "rank": 8,
+    "seed": 42,
+    "selected_epoch": 3,
+    "threads": 2,
+    "total_parameters": 134607168,
+    "train_count": 603,
+    "trainable_parameters": 92160,
+    "training_elapsed_s": 3307.66480720001,
+    "validation_count": 206,
+    "validation_loss": 0.34457541309624534
+  },
+  "created_utc": "2026-11-09T07:45:55.562930+00:00",
+  "criteria": [
+    {
+      "criterion_text": "Age 18 to 65 years",
+      "criterion_type": "inclusion",
+      "evidence": [
+        0
+      ],
+      "evidence_text": [
+        {
+          "sentence_id": 0,
+          "text": "A 52-year-old woman has type 2 diabetes."
+        }
+      ],
+      "explanation": "The Transformer predicted \"not enough information\" for this inclusion criterion. Model-cited source text: [0] A 52-year-old woman has type 2 diabetes.",
+      "explanation_method": "Template plus verbatim model-selected source sentences; not a clinical rationale.",
+      "label": "not enough information",
+      "needs_review": true,
+      "preprocessing": {
+        "input_tokens": 151,
+        "omitted_sentence_ids": [],
+        "sentence_ids": [
+          0,
+          1,
+          2,
+          3
+        ]
+      },
+      "raw_output": " E1000",
+      "review_reason": "Check missing information, unsupported conclusion, or truncated record.",
+      "timing": {
+        "cache_lengths": [
+          151,
+          152,
+          153,
+          154,
+          155
+        ],
+        "decode_s": 1.0464258000001792,
+        "decode_tokens_per_s": 3.8225357211178426,
+        "prefill_s": 0.5078270000003613,
+        "tokens": [
+          414,
+          33,
+          32,
+          32,
+          32
+        ],
+        "tokens_per_s": 3.2169798889847656,
+        "total_s": 1.5542528000005404
+      }
+    },
+    {
+      "criterion_text": "Documented type 2 diabetes",
+      "criterion_type": "inclusion",
+      "evidence": [],
+      "evidence_text": [],
+      "explanation": "The Transformer predicted \"not enough information\" for this inclusion criterion. The model cited no patient sentence. This does not establish absence of the condition.",
+      "explanation_method": "Template plus verbatim model-selected source sentences; not a clinical rationale.",
+      "label": "not enough information",
+      "needs_review": true,
+      "preprocessing": {
+        "input_tokens": 148,
+        "omitted_sentence_ids": [],
+        "sentence_ids": [
+          0,
+          1,
+          2,
+          3
+        ]
+      },
+      "raw_output": " E0000",
+      "review_reason": "Check missing information, unsupported conclusion, or truncated record.",
+      "timing": {
+        "cache_lengths": [
+          148,
+          149,
+          150,
+          151,
+          152
+        ],
+        "decode_s": 0.4941557999991346,
+        "decode_tokens_per_s": 8.094613075485515,
+        "prefill_s": 1.2747446000003038,
+        "tokens": [
+          414,
+          32,
+          32,
+          32,
+          32
+        ],
+        "tokens_per_s": 2.8266147715278866,
+        "total_s": 1.7689003999994384
+      }
+    },
+    {
+      "criterion_text": "Severe renal impairment",
+      "criterion_type": "exclusion",
+      "evidence": [],
+      "evidence_text": [],
+      "explanation": "The Transformer predicted \"not excluded\" for this exclusion criterion. The model cited no patient sentence. This does not establish absence of the condition.",
+      "explanation_method": "Template plus verbatim model-selected source sentences; not a clinical rationale.",
+      "label": "not excluded",
+      "needs_review": true,
+      "preprocessing": {
+        "input_tokens": 145,
+        "omitted_sentence_ids": [],
+        "sentence_ids": [
+          0,
+          1,
+          2,
+          3
+        ]
+      },
+      "raw_output": " D0000",
+      "review_reason": "Check missing information, unsupported conclusion, or truncated record.",
+      "timing": {
+        "cache_lengths": [
+          145,
+          146,
+          147,
+          148,
+          149
+        ],
+        "decode_s": 0.5150658000002295,
+        "decode_tokens_per_s": 7.7659980530608275,
+        "prefill_s": 0.6419193000001542,
+        "tokens": [
+          422,
+          32,
+          32,
+          32,
+          32
+        ],
+        "tokens_per_s": 4.3215768292939485,
+        "total_s": 1.1569851000003837
+      }
+    }
+  ],
+  "decoding_mode": "cached",
+  "model": "SmolLM2-135M-Instruct + local LoRA",
+  "notice": "Educational screening prototype. Not a clinical enrollment decision.",
+  "overall_preliminary_outcome": "Insufficient information or applicability review required",
+  "patient_record": "0. A 52-year-old woman has type 2 diabetes.\n1. She takes metformin daily.\n2. Her most recent HbA1c is 7.5%.\n3. Kidney function is not documented.",
+  "patient_sha256": "10614bf848b121f3b2d47be115a5c2105885c42dd439f9791d1e3cc6569d8f1c"
+}

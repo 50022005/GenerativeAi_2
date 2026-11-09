@@ -1,4 +1,18 @@
 from app import app, jobs
+import json
+
+
+def test_trial_selector_is_strict_browser_json():
+    # Real training annotations contain a missing-text NaN. Python's default
+    # decoder tolerates it, but browser Response.json() rejects the whole list.
+    def reject_constant(value):
+        raise ValueError('Non-JSON numeric constant: '+value)
+    with app.test_client() as c:
+        response=c.get('/api/criteria')
+        rows=json.loads(response.get_data(as_text=True),parse_constant=reject_constant)
+        assert response.status_code==200 and rows
+        assert all(isinstance(r['text'],str) and 1<=len(r['text'].strip())<=3000
+                   and r['type'] in ('inclusion','exclusion') for criteria in rows.values() for r in criteria)
 
 def test_invalid_requests():
     with app.test_client() as c:

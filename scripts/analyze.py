@@ -77,7 +77,7 @@ def main():
     test_log=(ROOT/'results/tests.txt').read_text(encoding='utf-8',errors='replace')
     passed=re.search(r'(\d+) passed',test_log)
     if not passed:raise ValueError('A successful final correctness-test record is required.')
-    s.append(f'The final automated suite reports {passed.group(1)} passing checks. These cover attention agreement, cached/uncached/speculative token equality, cache growth, full-acceptance and rejection branches, early stopping, structured masks, evidence empty-set conventions, data isolation, response-loss equivalence, frozen base weights, truncation and application input/export handling.')
+    s.append(f'The original CPU automated suite reports {passed.group(1)} passing checks. These cover attention agreement, cached/uncached/speculative token equality, cache growth, full-acceptance and rejection branches, early stopping, structured masks, evidence empty-set conventions, data isolation, response-loss equivalence, frozen base weights, truncation and application input/export handling.')
     s.append(r'\begin{table}[t]\centering\small\caption{Selected training configuration and observed preprocessing.}\label{tab:training}\begin{tabular}{lr}\toprule Setting & Value\\\midrule')
     s += [f'Target parameters & {cfg["total_parameters"]:,}'+r'\\',f'Trainable parameters & {cfg["trainable_parameters"]:,}'+r'\\',f'Selected epoch & {selected["selected_epoch"]}'+r'\\',f'Best validation loss & {selected["validation_loss"]:.4f}'+r'\\',f'Three-epoch elapsed time & {epochs[-1]["elapsed_s"]/60:.2f} min'+r'\\']
     trunc=load('truncation.json')
@@ -207,8 +207,17 @@ def main():
     screenshot=figdir/'application.png'
     if not screenshot.exists():screenshot=figdir/'application.jpg'
     if screenshot.exists():
-        s.append(r'\begin{figure*}[t]\centering\includegraphics[width=\textwidth]{'+screenshot.name+r'}\caption{Actual local browser screening interface. Source citations and model predictions remain visible for review.}\label{fig:app}\end{figure*}')
-        s.append(r'Figure~\ref{fig:app} shows the running application. Its inference tab computes new measurements, and exported reports retain the source record and model provenance.')
+        s.append(r'\subsection{Final Browser Workflow Verification}')
+        s.append(r'\begin{figure*}[t]\centering\includegraphics[width=\textwidth]{'+screenshot.name+r'}\caption{Genuine browser capture of the final CPU application on a synthetic record. The model abstains on an age criterion despite citing the stated age; this visible failure is preserved. The review warning and report-export control are part of the running interface.}\label{fig:app}\end{figure*}')
+        s.append(r'Figure~\ref{fig:app} shows an actual model result, not a mockup. Empty-note and malformed-criterion errors were displayed, followed by successful recovery. Cached, uncached and speculative screening completed through browser controls with identical emitted tokens. The downloaded HTML report was opened in a browser and retained the synthetic record, citation, selected epoch and adapter fingerprint. The study-results tab displayed the saved held-out metrics. These functional checks do not validate clinical reasoning.')
+        verification=ROOT/'results/browser_verification/summary.json'
+        if verification.exists():
+            v=json.loads(verification.read_text())
+            live=v['live_benchmark']
+            s.append(f"A browser-triggered live comparison used {live['input_tokens']} input tokens and {live['output_tokens']} raw output tokens, one warmup and two measured repeats per mode. Token equality passed. Mean total latency was {live['uncached']['mean_s']:.3f} s uncached, {live['cached']['mean_s']:.3f} s cached, and {live['speculative']['mean_s']:.3f} s speculative; draft acceptance was {100*live['speculative']['acceptance_rate']:.1f}\\%. This is a UI smoke comparison, separate from the controlled three-repeat benchmark tables.")
+            s.append(r'Browser verification exposed a missing criterion-text value that serialized as NaN and prevented JavaScript from loading the trial selector. The application now filters invalid convenience-metadata entries; the benchmark split, annotations, frozen inference code and selected adapter were not changed. After correction, the browser populated the trial list and loaded selected criteria. A regression test rejects nonstandard JSON constants. The current full suite passes 22 checks, including the GPU-extension checks and this regression.')
+        if (figdir/'inference.jpg').exists():
+            s.append(r'The live inference view exposes new measurements rather than a static performance chart; its additional screenshot accompanies the source as inference.jpg. Screenshot bytes were captured directly from the browser and saved unchanged; capture hashes and the verification record accompany the source.')
     (ROOT/'report/generated_results.tex').write_text('\n\n'.join(s),encoding='utf-8')
     (ROOT/'results/error_analysis.md').write_text('\n'.join(md),encoding='utf-8')
     (ROOT/'results/summary.json').write_text(json.dumps({'selected_epoch':selected['selected_epoch'],

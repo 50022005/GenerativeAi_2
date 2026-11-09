@@ -7,8 +7,8 @@ required=['output/pdf/Criterion_Report.pdf','models/adapter/adapter.pt','data/sp
 for f in required:
     if not (ROOT/f).is_file():raise SystemExit('Missing final artifact: '+f)
 dest=ROOT/'output/Criterion_Submission.zip'
-folders=['trialmatch','scripts','tests','web','report','licenses','models/adapter','data/processed','results','output/pdf']
-roots=['README.md','DEMO_GUIDE.md','SUBMISSION_CHECKLIST.md','THIRD_PARTY_NOTICES.md','FINAL_STATUS.md',
+folders=['trialmatch','kaggle_study','scripts','tests','web','report','licenses','models/adapter','data/processed','results','output/pdf']
+roots=['README.md','DEMO_GUIDE.md','SUBMISSION_CHECKLIST.md','THIRD_PARTY_NOTICES.md','FINAL_STATUS.md','RUBRIC_REVIEW.md','KAGGLE_RESULTS.md','output/tests_all.txt',
        'Setup_CPU.bat','Start_App.bat','Train_CPU.bat','Build_Report.bat','app.py','requirements.txt','pyproject.toml',
        'data/split_manifest.json','data/demo_cases.json','.gitignore','.gitattributes']
 files=[ROOT/f for f in roots]

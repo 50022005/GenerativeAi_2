@@ -85,9 +85,14 @@ def criteria():
     # Application convenience metadata is restricted to training patients.
     trials = {}
     for r in read_split('train'):
+        kind, text = r['criterion_type'], r['criterion_text']
+        # Some source annotations have NaN/missing criterion text. These cannot
+        # be offered as application inputs or serialized as strict browser JSON.
+        if kind not in ('inclusion','exclusion') or not isinstance(text,str) or not 1 <= len(text.strip()) <= 3000:
+            continue
         key = r['trial_id']
         trial = trials.setdefault(key, {})
-        trial[(r['criterion_type'],r['criterion_text'])] = {'type':r['criterion_type'],'text':r['criterion_text']}
+        trial[(kind,text)] = {'type':kind,'text':text}
     return jsonify({k:list(v.values()) for k,v in sorted(trials.items())})
 
 def validate(payload):

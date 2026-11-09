@@ -58,4 +58,4 @@ Downloaded study archive SHA-256: `373d2a0208f81fc385c166730922afaba1573b6f7daa2
 
 ## Remaining student submission steps
 
-Follow `DEMO_GUIDE.md` to record the required five-to-seven-minute application demonstration and prepare for the live defense. Use the GitHub source URL above after verifying the uploaded files are accessible. No video or Classroom submission is claimed. Review `RUBRIC_REVIEW.md`, understand the implementation and AI-use disclosure, and add a real application screenshot before submission.
+Follow `DEMO_GUIDE.md` to record the required five-to-seven-minute application demonstration and prepare for the live defense. Use the GitHub source URL above after verifying the uploaded files are accessible. No video or Classroom submission is claimed. Final browser verification and genuine screenshot integration into the main IEEE report are complete; see `RUBRIC_REVIEW.md` for the remaining student steps.

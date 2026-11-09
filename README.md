@@ -20,9 +20,9 @@ The original CPU application and held-out study are accompanied by a completed p
 
 The adapted model predicts `not excluded` for all 131 exclusion test records and cites no sentence in 181/206 test records. These are major measured failures, not evidence of clinical reliability. The report discusses them explicitly. The implementation and inference checks pass, but model quality remains limited.
 
-All 21 current correctness checks pass (16 original checks plus five GPU-extension checks). Cached and speculative generation agree token-for-token with ordinary greedy decoding at all three measured length pairs. In the original CPU study, caching is 2.02–8.28 times as fast as the uncached reference; speculation is slower. Maximum tiled-attention error is below 0.000001.
+All 22 current correctness checks pass (16 original checks, five GPU-extension checks, and a trial-selector JSON regression). Cached and speculative generation agree token-for-token with ordinary greedy decoding at all three measured length pairs. In the original CPU study, caching is 2.02–8.28 times as fast as the uncached reference; speculation is slower. Maximum tiled-attention error is below 0.000001.
 
-See `FINAL_STATUS.md` for remaining submission steps. Final browser capture was blocked by the computer-use tool's URL-confidence check; an actual screenshot and the student's recorded demonstration still need to be added. The final trained HTTP backend, export and live comparison have independent verification records in `results/application_check/`.
+Final browser verification completed on November 9: input-error recovery, all three screening modes, source citations, trial selection, a newly entered synthetic record, HTML export, study results and a live comparison were checked through browser controls. Genuine screenshots are in `report/figures/application.jpg`, `inference.jpg` and `export.jpg`; the rebuilt IEEE paper includes the application capture. See `results/browser_verification/` for the record and `FINAL_STATUS.md` for remaining video/submission/defense steps. The trial selector now excludes missing or invalid convenience metadata so its response is valid browser JSON.
 
 ## Open the application
 
@@ -118,7 +118,7 @@ Evidence scoring uses original-ID sets. Both-empty gold/prediction sets score P/
 - `results/`: raw predictions, metrics, training logs, frozen protocol, benchmarks, measured figures and error analysis.
 - `DEMO_GUIDE.md`: a timed six-minute student-recording plan and defense preparation.
 - `Build_Report.bat`: rebuild the paper after saving an actual app screenshot as `report/figures/application.png` or `.jpg`.
-- `FINAL_STATUS.md`: completed work and the remaining browser screenshot/video/submission steps.
+- `FINAL_STATUS.md`: completed work and the remaining video/submission/defense steps.
 - `SUBMISSION_CHECKLIST.md`: final items to verify before uploading to Classroom.
 
 Compile with a standard LaTeX installation: run `pdflatex main.tex` twice inside `report/` (all bibliography entries are embedded). Alternatively, use `tectonic report/main.tex`; first use downloads its free standard TeX packages. The resulting PDF can be copied to `output/pdf/Criterion_Report.pdf`. Re-run `scripts/analyze.py` before compilation only after all final experiments finish. The analysis script refuses incomplete required inputs rather than inventing results.
