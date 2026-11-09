@@ -1,0 +1,19 @@
+{
+  "class_weights": {
+    "inclusion": {
+      "not enough information": 0.8024572303882253,
+      "not included": 2.3236112331993923,
+      "included": 0.8930870816726817,
+      "not applicable": 3.7467105337790696
+    },
+    "exclusion": {
+      "not excluded": 0.6954540121940929,
+      "not enough information": 1.4740192810472772,
+      "not applicable": 2.4779693181456985,
+      "excluded": 4.015360106737601
+    }
+  },
+  "positive_evidence_tokens": 418,
+  "negative_evidence_tokens": 3257,
+  "positive_evidence_weight": 2.7913914144576957
+}

@@ -1,0 +1,313 @@
+{
+  "overall": {
+    "count": 206,
+    "accuracy": 0.6262135922330098,
+    "macro_f1": 0.22522615800975743,
+    "per_class": {
+      "included": {
+        "precision": 1.0,
+        "recall": 0.02857142857142857,
+        "f1-score": 0.05555555555555555,
+        "support": 35.0
+      },
+      "not included": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 3.0
+      },
+      "excluded": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 2.0
+      },
+      "not excluded": {
+        "precision": 0.7214285714285714,
+        "recall": 1.0,
+        "f1-score": 0.8381742738589212,
+        "support": 101.0
+      },
+      "not enough information": {
+        "precision": 0.4153846153846154,
+        "recall": 0.5094339622641509,
+        "f1-score": 0.4576271186440678,
+        "support": 53.0
+      },
+      "not applicable": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 12.0
+      },
+      "accuracy": 0.6262135922330098,
+      "macro avg": {
+        "precision": 0.35613553113553115,
+        "recall": 0.2563342318059299,
+        "f1-score": 0.22522615800975743,
+        "support": 206.0
+      },
+      "weighted avg": {
+        "precision": 0.6304838365517976,
+        "recall": 0.6262135922330098,
+        "f1-score": 0.5381275892831605,
+        "support": 206.0
+      }
+    },
+    "confusion_labels": [
+      "included",
+      "not included",
+      "excluded",
+      "not excluded",
+      "not enough information",
+      "not applicable"
+    ],
+    "confusion_matrix": [
+      [
+        1,
+        0,
+        0,
+        0,
+        34,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        3,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        2,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        101,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        26,
+        27,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        11,
+        1,
+        0
+      ]
+    ],
+    "evidence": {
+      "micro_precision": 1.0,
+      "micro_recall": 0.008695652173913044,
+      "micro_f1": 0.017241379310344827,
+      "macro_precision": 0.5679611650485437,
+      "macro_recall": 0.5679611650485437,
+      "macro_f1": 0.5679611650485437,
+      "both_empty_count": 116,
+      "tp_fp_fn": [
+        1,
+        0,
+        114
+      ],
+      "empty_policy": "Both empty: per-record P/R/F1=1; one empty: P/R/F1=0. Empty pairs add no micro counts."
+    }
+  },
+  "inclusion": {
+    "count": 66,
+    "accuracy": 0.42424242424242425,
+    "macro_f1": 0.16062801932367152,
+    "per_class": {
+      "included": {
+        "precision": 1.0,
+        "recall": 0.02857142857142857,
+        "f1-score": 0.05555555555555555,
+        "support": 35.0
+      },
+      "not included": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 3.0
+      },
+      "not enough information": {
+        "precision": 0.4153846153846154,
+        "recall": 1.0,
+        "f1-score": 0.5869565217391305,
+        "support": 27.0
+      },
+      "not applicable": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 1.0
+      },
+      "accuracy": 0.42424242424242425,
+      "macro avg": {
+        "precision": 0.35384615384615387,
+        "recall": 0.2571428571428571,
+        "f1-score": 0.16062801932367152,
+        "support": 66.0
+      },
+      "weighted avg": {
+        "precision": 0.7002331002331003,
+        "recall": 0.42424242424242425,
+        "f1-score": 0.2695798565363783,
+        "support": 66.0
+      }
+    },
+    "confusion_labels": [
+      "included",
+      "not included",
+      "not enough information",
+      "not applicable"
+    ],
+    "confusion_matrix": [
+      [
+        1,
+        0,
+        34,
+        0
+      ],
+      [
+        0,
+        0,
+        3,
+        0
+      ],
+      [
+        0,
+        0,
+        27,
+        0
+      ],
+      [
+        0,
+        0,
+        1,
+        0
+      ]
+    ],
+    "evidence": {
+      "micro_precision": 1.0,
+      "micro_recall": 0.014925373134328358,
+      "micro_f1": 0.029411764705882353,
+      "macro_precision": 0.25757575757575757,
+      "macro_recall": 0.25757575757575757,
+      "macro_f1": 0.25757575757575757,
+      "both_empty_count": 16,
+      "tp_fp_fn": [
+        1,
+        0,
+        66
+      ],
+      "empty_policy": "Both empty: per-record P/R/F1=1; one empty: P/R/F1=0. Empty pairs add no micro counts."
+    }
+  },
+  "exclusion": {
+    "count": 140,
+    "accuracy": 0.7214285714285714,
+    "macro_f1": 0.2095435684647303,
+    "per_class": {
+      "excluded": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 2.0
+      },
+      "not excluded": {
+        "precision": 0.7214285714285714,
+        "recall": 1.0,
+        "f1-score": 0.8381742738589212,
+        "support": 101.0
+      },
+      "not enough information": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 26.0
+      },
+      "not applicable": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 11.0
+      },
+      "accuracy": 0.7214285714285714,
+      "macro avg": {
+        "precision": 0.18035714285714285,
+        "recall": 0.25,
+        "f1-score": 0.2095435684647303,
+        "support": 140.0
+      },
+      "weighted avg": {
+        "precision": 0.5204591836734694,
+        "recall": 0.7214285714285714,
+        "f1-score": 0.6046828689982218,
+        "support": 140.0
+      }
+    },
+    "confusion_labels": [
+      "excluded",
+      "not excluded",
+      "not enough information",
+      "not applicable"
+    ],
+    "confusion_matrix": [
+      [
+        0,
+        2,
+        0,
+        0
+      ],
+      [
+        0,
+        101,
+        0,
+        0
+      ],
+      [
+        0,
+        26,
+        0,
+        0
+      ],
+      [
+        0,
+        11,
+        0,
+        0
+      ]
+    ],
+    "evidence": {
+      "micro_precision": 0.0,
+      "micro_recall": 0.0,
+      "micro_f1": 0.0,
+      "macro_precision": 0.7142857142857143,
+      "macro_recall": 0.7142857142857143,
+      "macro_f1": 0.7142857142857143,
+      "both_empty_count": 100,
+      "tp_fp_fn": [
+        0,
+        0,
+        48
+      ],
+      "empty_policy": "Both empty: per-record P/R/F1=1; one empty: P/R/F1=0. Empty pairs add no micro counts."
+    }
+  }
+}

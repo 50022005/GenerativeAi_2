@@ -20,3 +20,5 @@ report/main.pdf
 output/*.zip
 results/*console.log
 GenAI_Assignment#2.pdf
+output/kaggle/*.zip
+output/kaggle/*.png

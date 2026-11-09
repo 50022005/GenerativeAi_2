@@ -4,7 +4,9 @@
 
 A locally executable SmolLM2-135M system for the TrialGPT criterion benchmark, with supervised low-rank adaptation, evidence sentence IDs, explicit cached/uncached generation, greedy speculative decoding, educational tiled attention, and a standalone browser application.
 
-**Delivery: local files only. Nothing has been uploaded to GitHub, as requested.**
+**Source repository:** https://github.com/50022005/GenerativeAi_2
+
+The original CPU application and held-out study are accompanied by a completed private Kaggle GPU extension. See `KAGGLE_RESULTS.md` for its validation-only results and `RUBRIC_REVIEW.md` for the submission audit. The app continues to use the original CPU-friendly 135M adapter.
 
 **Educational screening prototype. Not a clinical enrollment decision.** Predictions and citations can be wrong. The aggregate message is an explicit rule over supplied criteria, not a ground-truth-labeled trial outcome.
 
@@ -18,7 +20,7 @@ A locally executable SmolLM2-135M system for the TrialGPT criterion benchmark, w
 
 The adapted model predicts `not excluded` for all 131 exclusion test records and cites no sentence in 181/206 test records. These are major measured failures, not evidence of clinical reliability. The report discusses them explicitly. The implementation and inference checks pass, but model quality remains limited.
 
-Sixteen correctness checks pass. Cached and speculative generation agree token-for-token with ordinary greedy decoding at all three measured length pairs. Caching is 2.02–8.28 times as fast as the uncached reference; speculation is slower. Maximum tiled-attention error is below 0.000001.
+All 21 current correctness checks pass (16 original checks plus five GPU-extension checks). Cached and speculative generation agree token-for-token with ordinary greedy decoding at all three measured length pairs. In the original CPU study, caching is 2.02–8.28 times as fast as the uncached reference; speculation is slower. Maximum tiled-attention error is below 0.000001.
 
 See `FINAL_STATUS.md` for remaining submission steps. Final browser capture was blocked by the computer-use tool's URL-confidence check; an actual screenshot and the student's recorded demonstration still need to be added. The final trained HTTP backend, export and live comparison have independent verification records in `results/application_check/`.
 

@@ -1,0 +1,4 @@
+Pre-publication verification: November 9, 2026
+Command: python -m pytest -q
+.....................                                                    [100%]
+21 passed in 27.39s

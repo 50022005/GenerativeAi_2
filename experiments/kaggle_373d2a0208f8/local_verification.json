@@ -1,0 +1,15 @@
+{
+  "archive_sha256": "373d2a0208f81fc385c166730922afaba1573b6f7daa24666042317f9779df34",
+  "validated_prediction_files": [
+    "balanced_epoch1_validation_predictions.jsonl",
+    "balanced_epoch2_validation_predictions.jsonl",
+    "balanced_epoch3_validation_predictions.jsonl",
+    "base_validation_predictions.jsonl",
+    "uniform_epoch1_validation_predictions.jsonl",
+    "uniform_epoch2_validation_predictions.jsonl",
+    "uniform_epoch3_validation_predictions.jsonl"
+  ],
+  "validation_rows": 206,
+  "test_evaluated": false,
+  "selected_adapter_sha256": "7d463f3ca12a44c988a5d38377f9baf067d2931f1a4edaddc89ca27ffe6acf10"
+}

@@ -1,0 +1,56 @@
+{
+  "seed": 42,
+  "target": [
+    "HuggingFaceTB/SmolLM2-360M-Instruct",
+    "a10cc1512eabd3dde888204e902eca88bddb4951"
+  ],
+  "draft": [
+    "HuggingFaceTB/SmolLM2-135M-Instruct",
+    "12fd25f77366fa6b3b4b768ec3050bf629380bac"
+  ],
+  "prior_test_use": true,
+  "status": "Post-original-test exploratory extension; training and selection use validation only. No new blind-test claim.",
+  "test_access": "No test annotations or prior test predictions are included in this cloud bundle.",
+  "candidates": [
+    "uniform",
+    "balanced"
+  ],
+  "epochs": 3,
+  "rank": 16,
+  "alpha": 32,
+  "layers": "q/v in every target block",
+  "lr": 0.0005,
+  "accumulation": 8,
+  "max_length": 1024,
+  "selection": "Maximum mean of validation classification macro-F1 and evidence micro-F1; tie keeps earlier checkpoint.",
+  "smoke_limit": 0,
+  "gpu": "Tesla T4",
+  "gpu_memory_gib": 14.56219482421875,
+  "torch": "2.11.0+cu130",
+  "cuda": "13.0",
+  "packages": {
+    "transformers": "5.8.0",
+    "numpy": "2.1.3",
+    "scikit-learn": "1.6.1"
+  },
+  "split_manifest_sha256": "51c23f7ee191eaf97e3618465c4b4003e6688548cdf36df865bc0306f513d8fb",
+  "objective": "balanced",
+  "selected_epoch": 3,
+  "validation": {
+    "objective": "balanced",
+    "epoch": 3,
+    "selection_score": 0.3146147503423899,
+    "accuracy": 0.6601941747572816,
+    "macro_f1": 0.3030492431740502,
+    "evidence_micro_f1": 0.3261802575107296,
+    "mean_training_loss": 0.7787270433521192
+  },
+  "last_layers": 32,
+  "trainable_parameters": 1638400,
+  "base": {
+    "repo": "HuggingFaceTB/SmolLM2-360M-Instruct",
+    "sha": "a10cc1512eabd3dde888204e902eca88bddb4951"
+  },
+  "training_precision": "torch.bfloat16",
+  "inference_precision": "float32"
+}

@@ -1,0 +1,1 @@
+Exploratory Kaggle GPU study. Test annotations were not included or evaluated. Original CPU results remain unchanged. Do not replace the original app adapter with this differently sized model without using a compatible loader.

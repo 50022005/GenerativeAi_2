@@ -1,0 +1,20 @@
+{
+  "files": {
+    "trialmatch/__init__.py": "750df0bc331fac6463bb743f9b61b33215c22a2d29f587edb42844212f8ffabe",
+    "trialmatch/data.py": "5d653d203cddfd38edeb72152e4bd43291097cd03200983f917f29e75d243ff9",
+    "trialmatch/decoding.py": "73a620d5989b6b2a50e74404bbea04c70ee0718ad2ef29795d3a543b36eb56ef",
+    "trialmatch/pipeline.py": "37250b09099d60af7ee7df08876311a9e17d34386372363fc0445af2aa5d6591",
+    "trialmatch/metrics.py": "2b7e7458b6625b438ae05a9ad20cd54088666e21c3896c04f6a10b91a2b9d778",
+    "trialmatch/attention.py": "eadbf3c834d1bf9ba0cb284412036f12c24d94a631d6764cd8460a196b9ea0da",
+    "kaggle_study/__init__.py": "ee48b9ea6d8365bc23f95b5ccf355087ba7c5860f67caa276925f6450ffa38ae",
+    "kaggle_study/core.py": "3da02e417196e2aebbc735295331b81cdd2120ad3efe379f19bd24b864efec51",
+    "kaggle_study/run.py": "d9d7eeebfb1fc6dc220ca0b6070a71a16f0e6da6950fdbf3f3a990648c1180e3",
+    "kaggle_study/benchmark.py": "f5b6113145a7a0396c004498e70c455472392bff8b1dc4982e17bd18f51e5ef4",
+    "data/processed/train.jsonl": "a6e617362d9666cd3344f8d038e1f06847aa008beba7b9463620a1f7f51da8cd",
+    "data/processed/validation.jsonl": "0946f43102e560df295d07eeac63f2d42ad24b9683a51d4774345a511c796844",
+    "data/split_manifest.json": "51c23f7ee191eaf97e3618465c4b4003e6688548cdf36df865bc0306f513d8fb"
+  },
+  "purpose": "Private GPU validation study; no original report, student ID, test annotations, test predictions, credentials or old model weights.",
+  "prior_test_use": true,
+  "decoder_change": "Explicit CUDA synchronization added to CPU decoding timestamps only."
+}
